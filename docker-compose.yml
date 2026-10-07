@@ -1,0 +1,55 @@
+# File: docker-compose.yml
+# Author: Marc Bria UAB (marc.bria@uab.es)
+
+services:
+  db:
+    image: ${DB_VERSION:-mariadb:11.8}
+    env_file:
+      - .env
+    container_name: "pkp_db_${COMPOSE_PROJECT_NAME:-demo}"
+    environment:
+      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD:-changeMePlease}"
+      MYSQL_DATABASE: "${MYSQL_DATABASE:-pkp}"
+      MYSQL_USER: "${MYSQL_USER:-pkp}"
+      MYSQL_PASSWORD: "${MYSQL_PASSWORD:-changeMePlease}"
+    volumes:
+      - ./volumes/db:/var/lib/mysql
+    networks:
+      - inside
+    restart: unless-stopped
+
+  app:
+    image: ${IMAGE_SOURCE:-local}/${PKP_TOOL:-omp}:${PKP_VERSION:-3_3_0-20}
+    env_file:
+      - .env
+    container_name: "pkp_app_${COMPOSE_PROJECT_NAME:-demo}"
+    hostname: "${COMPOSE_PROJECT_NAME:-demo}"
+    ports:
+      - ${HTTP_PORT:-8081}:80
+      - ${HTTPS_PORT:-443}:443
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./volumes/private:/var/www/files
+      - ./volumes/public:/var/www/html/public
+      - ./volumes/config/pkp.config.inc.php:/var/www/html/config.inc.php
+      - ./volumes/config/php.custom.ini:/usr/local/etc/php/conf.d/custom.ini
+    networks:
+      - inside
+    depends_on:
+      - db
+      - mailpit
+    restart: unless-stopped
+
+  mailpit:
+    image: axllent/mailpit:latest
+    container_name: "pkp_mailpit_${COMPOSE_PROJECT_NAME:-demo}"
+    ports:
+      - "8025:8025"
+      - "1025:1025"
+    networks:
+      - inside
+    restart: unless-stopped
+
+networks:
+  inside:
+    external: false

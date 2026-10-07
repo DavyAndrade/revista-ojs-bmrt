@@ -1,0 +1,22 @@
+# Editor & OS files
+.swp
+.sandbox
+older
+*.log
+.DS_Store
+
+# Sensitive environment configuration
+.env
+
+# Generated application config with encryption keys
+volumes/config/pkp.config.inc.php
+
+# Persistent data volumes
+volumes/db/
+volumes/db/**
+volumes/private/
+volumes/private/**
+volumes/public/
+volumes/public/**
+volumes/logs/
+volumes/logs/**
