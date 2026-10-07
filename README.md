@@ -56,6 +56,50 @@ docker compose up -d
 
 ---
 
+## 👥 Gestão de Equipe & Papéis (Roles)
+
+O OJS separa as permissões entre o escopo da revista e o escopo do servidor:
+
+### 1. Administrador da Revista (Gerente da Revista)
+Responsável pela gestão diária da BMRT (equipe, design, pareceres, publicação).
+* **Como adicionar pelo painel:**
+  1. Acesse o painel da BMRT: **Configurações** -> **Usuários e Papéis** -> **Usuários**.
+  2. Clique em **Adicionar Usuário**.
+  3. Preencha os dados e marque:
+     * ☑ **Gerente da revista** (*Journal manager*)
+     * ☑ **Editor da revista** (*Journal editor*)
+  4. Salve.
+
+### 2. Administrador Global do Sistema (Root / Sysadmin)
+Acesso de infraestrutura no servidor, capaz de criar novas revistas e gerenciar configurações globais.
+* **Como promover um usuário existente via terminal:**
+```bash
+docker exec pkp_app_bmrt_ojs php -r '
+require "/var/www/html/tools/bootstrap.php";
+$user = \APP\facades\Repo::user()->getByUsername("NOME_DO_USUARIO");
+if ($user) {
+    $m = new mysqli("db", "pkp", "bmrt_db_pass_2026", "pkp");
+    $m->query("INSERT IGNORE INTO user_user_groups (user_group_id, user_id) VALUES (1, " . $user->getId() . ")");
+    echo "Usuário promovido a Administrador Global do Site!\n";
+}
+'
+```
+
+---
+
+## 📂 Por que este repositório é focado em Docker e Shell?
+
+O repositório adota o padrão moderno de **Infraestrutura como Código (IaC)**:
+
+1. **Core do OJS empacotado:** Os mais de 100 MB de arquivos PHP, Smarty, Vue.js e bibliotecas do motor OJS já vêm testados, compilados e otimizados dentro da imagem oficial `pkpofficial/ojs:stable-3_5_0` fornecida pelo PKP. Versionar o core no repositório seria duplicar código de terceiros e dificultar atualizações de versão.
+2. **Atualizações com 1 comando:** Para atualizar a versão do OJS, basta alterar a tag no arquivo `.env` e rodar `docker compose pull && docker compose up -d`.
+3. **Onde entra código customizado (HTML, CSS, PHP)?**
+   * **CSS Customizado:** Pode ser enviado diretamente pelo painel web da revista (*Configurações -> Website -> Aparência*).
+   * **Temas Customizados:** Podem ser desenvolvidos mapeando uma pasta local para `./volumes/plugins/themes/seu-tema` (onde você programa arquivos `.tpl`, `.less`/`.css` e PHP do tema).
+   * **Plugins Customizados:** Criados e versionados dentro de volumes mapeados em plugins.
+
+---
+
 ## 🔒 Segurança
 
 * O arquivo `.env` e as configurações ativas com chaves criptográficas (`volumes/config/pkp.config.inc.php`) **não são versionados** no Git.
