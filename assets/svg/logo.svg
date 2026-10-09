@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 160" width="540" height="160">
+  <defs>
+    <!-- Sombra suave para o card retangular -->
+    <filter id="logoShadow" x="-5%" y="-5%" width="110%" height="115%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000000" flood-opacity="0.08" />
+    </filter>
+  </defs>
+
+  <!-- Fundo retangular branco com cantos suavemente arredondados e borda sutil -->
+  <rect x="4" y="4" width="532" height="152" rx="10" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5" filter="url(#logoShadow)" />
+
+  <!-- Símbolo Institucional BMRT (Gráfico de 4 Colunas com Alinhamento na Base) -->
+  <g id="bmrt-emblem" transform="translate(30, 24)">
+    <!-- Barra 1: Verde Esmeralda Vibrante (#28B78D), h=48 -->
+    <rect x="0" y="48" width="22" height="48" rx="3" fill="#28B78D" />
+    <!-- Barra 2: Slate Escuro Institucional (#243743), h=82 -->
+    <rect x="30" y="14" width="24" height="82" rx="3" fill="#243743" />
+    <!-- Barra 3: Cinza Prateado (#A0A9AE), h=62 -->
+    <rect x="62" y="34" width="22" height="62" rx="3" fill="#A0A9AE" />
+    <!-- Barra 4: Verde Esmeralda Vibrante (#28B78D), h=42 -->
+    <rect x="92" y="54" width="20" height="42" rx="3" fill="#28B78D" />
+  </g>
+
+  <!-- Linha divisória vertical elegante entre o símbolo e a tipografia -->
+  <line x1="168" y1="28" x2="168" y2="132" stroke="#E2E8F0" stroke-width="1.5" stroke-linecap="round" />
+
+  <!-- Tipografia e Nomenclatura Institucional -->
+  <g id="bmrt-typography" transform="translate(192, 0)">
+    <!-- BMRT: Verde Floresta Institucional Oficial (#008037) -->
+    <text x="0" y="66" font-family="'Open Sans', 'Segoe UI', 'Roboto', 'Noto Sans', sans-serif" font-weight="900" font-size="44" fill="#008037" letter-spacing="3px">BMRT</text>
+    
+    <!-- SBCAL: Sigla Institucional da Sociedade Brasileira de Ciência em Animais de Laboratório (#47966F) -->
+    <text x="2" y="93" font-family="'Open Sans', 'Segoe UI', 'Roboto', 'Noto Sans', sans-serif" font-weight="800" font-size="18" fill="#47966F" letter-spacing="4px">SBCAL</text>
+    
+    <!-- Linha separadora institucional -->
+    <line x1="2" y1="104" x2="318" y2="104" stroke="#66B387" stroke-width="1.5" stroke-linecap="round" />
+    
+    <!-- Nome Completo da Revista Científica -->
+    <text x="2" y="124" font-family="'Open Sans', 'Segoe UI', 'Roboto', 'Noto Sans', sans-serif" font-weight="600" font-size="12" fill="#243743" letter-spacing="0.3px">Biological Models Research &amp; Technology</text>
+  </g>
+</svg>
