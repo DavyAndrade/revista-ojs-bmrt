@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Revista-PKP — Complete Call Flow &amp; Architecture Documentation</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<style>
+:root {
+  --bg: #0f172a; --surface: #1e293b; --border: #334155;
+  --text: #e2e8f0; --muted: #94a3b8; --accent: #38bdf8;
+  --warn: #fbbf24; --err: #f87171; --ok: #34d399;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+.container { max-width: 1200px; margin: 0 auto; padding: 40px 24px; }
+h1 { font-size: 2.4rem; margin-bottom: 8px; background: linear-gradient(135deg, var(--accent), #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+h2 { font-size: 1.7rem; margin: 48px 0 16px; padding-bottom: 8px; border-bottom: 2px solid var(--accent); }
+h3 { font-size: 1.25rem; margin: 32px 0 12px; color: var(--accent); }
+h4 { font-size: 1.05rem; margin: 20px 0 8px; color: var(--warn); }
+p { margin: 8px 0; color: var(--muted); }
+.subtitle { color: var(--muted); font-size: 1.1rem; margin-bottom: 32px; }
+.mermaid { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin: 20px 0; overflow-x: auto; position: relative; }
+.mermaid.is-enhanced { padding: 0; overflow: hidden; min-height: 260px; }
+.mermaid-viewport { padding: 54px 24px 24px; overflow: hidden; cursor: grab; touch-action: none; min-height: 260px; }
+.mermaid-viewport.is-dragging { cursor: grabbing; }
+.mermaid-viewport svg { max-width: none !important; height: auto; transform-origin: 0 0; transition: transform 120ms ease; }
+.mermaid-toolbar { position: absolute; top: 10px; right: 10px; z-index: 3; display: flex; align-items: center; gap: 6px; padding: 6px; background: rgba(15,23,42,0.92); border: 1px solid var(--border); border-radius: 8px; box-shadow: 0 8px 24px rgba(0,0,0,0.28); }
+.mermaid-toolbar button, .mermaid-toolbar .zoom-level { height: 28px; min-width: 32px; border: 1px solid var(--border); border-radius: 6px; background: #1e293b; color: var(--text); font: 600 0.78rem system-ui, sans-serif; display: inline-flex; align-items: center; justify-content: center; }
+.mermaid-toolbar button { cursor: pointer; }
+.mermaid-toolbar button:hover { border-color: var(--accent); color: var(--accent); }
+.mermaid-toolbar .zoom-level { min-width: 52px; color: var(--muted); background: transparent; }
+.call-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.92rem; }
+.call-table th { background: #1a2744; color: var(--accent); text-align: left; padding: 10px 14px; border: 1px solid var(--border); }
+.call-table td { padding: 8px 14px; border: 1px solid var(--border); vertical-align: top; }
+.call-table tr:nth-child(even) { background: rgba(255,255,255,0.02); }
+.tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; }
+.tag-async { background: #7c3aed33; color: #a78bfa; }
+.tag-class { background: #05966933; color: var(--ok); }
+.tag-func { background: #2563eb33; color: var(--accent); }
+.tag-cmd { background: #d9770633; color: var(--warn); }
+.tag-endpoint { background: #dc262633; color: var(--err); }
+.tag-hook { background: #db277733; color: #f472b6; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 20px; margin: 16px 0; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; margin: 16px 0; }
+.arrow-chain { font-family: 'Fira Code', monospace; font-size: 0.85rem; color: var(--accent); padding: 10px; background: rgba(56,189,248,0.06); border-radius: 6px; }
+code { font-family: 'Fira Code', 'Cascadia Code', monospace; background: rgba(255,255,255,0.06); padding: 1px 6px; border-radius: 3px; font-size: 0.88em; }
+ul, ol { margin: 8px 0 8px 24px; color: var(--muted); }
+li { margin: 4px 0; }
+a { color: var(--accent); }
+hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
+.nav { position: sticky; top: 0; background: var(--bg); z-index: 10; padding: 12px 0; border-bottom: 1px solid var(--border); display: flex; gap: 20px; flex-wrap: wrap; font-size: 0.9rem; }
+.nav a { text-decoration: none; }
+.nav a:hover { text-decoration: underline; }
+@media (max-width: 768px) { .container { padding: 16px; } h1 { font-size: 1.8rem; } }
+
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>Revista-PKP — Complete Call Flow &amp; Architecture Documentation</h1>
+<p class="subtitle">Generated from graphify knowledge graph: 25 nodes, 23 edges, 9 communities. Commit: 68e565d</p>
+
+<div class="nav">
+    <a href="#overview">Architecture Overview</a>
+    <a href="#cli-skills">CLI &amp; Skill Installers</a>
+    <a href="#buildremoteregistrysh-extractversions-normalizew">Buildremoteregistrysh Extractversions Normalizewebserver</a>
+    <a href="#pkp-patch-templates">Pkp Patch Templates</a>
+    <a href="#pkp-migrate-templates">Pkp Migrate Templates</a>
+    <a href="#pkp-pre-start">Pkp Pre Start</a>
+    <a href="#pkp-run-scheduled">Pkp Run Scheduled</a>
+    <a href="#pkp-start-templates">Pkp Start Templates</a>
+    <a href="#pkp-upgrade-templates">Pkp Upgrade Templates</a>
+    <a href="#pkp-variable-templates">Pkp Variable Templates</a>
+</div>
+
+<!-- ====== Architecture Overview ====== -->
+<h2 id="overview">1. Architecture Overview</h2>
+
+<div class="mermaid">
+
+%%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
+flowchart LR
+    CLI_SKILLS_9964CBB8("CLI &amp; Skill Installers<br/><small>2 nodes</small>")
+    class CLI_SKILLS_9964CBB8 module;
+    BUILDREMOTEREGISTRYSH_EXTRACTVERSIONS_NORMALIZEW_8A20F8A7("Buildremoteregistrysh Extractversions Normalizewebserver<br/><small>7 nodes</small>")
+    class BUILDREMOTEREGISTRYSH_EXTRACTVERSIONS_NORMALIZEW_8A20F8A7 module;
+    PKP_PATCH_TEMPLATES_9ED235F4("Pkp Patch Templates<br/><small>4 nodes</small>")
+    class PKP_PATCH_TEMPLATES_9ED235F4 module;
+    PKP_MIGRATE_TEMPLATES_8D359015("Pkp Migrate Templates<br/><small>2 nodes</small>")
+    class PKP_MIGRATE_TEMPLATES_8D359015 module;
+    PKP_PRE_START_BA1FA92C("Pkp Pre Start<br/><small>2 nodes</small>")
+    class PKP_PRE_START_BA1FA92C module;
+    PKP_RUN_SCHEDULED_A23C5099("Pkp Run Scheduled<br/><small>2 nodes</small>")
+    class PKP_RUN_SCHEDULED_A23C5099 module;
+    PKP_START_TEMPLATES_CC71115A("Pkp Start Templates<br/><small>2 nodes</small>")
+    class PKP_START_TEMPLATES_CC71115A module;
+    PKP_UPGRADE_TEMPLATES_1C914B77("Pkp Upgrade Templates<br/><small>2 nodes</small>")
+    class PKP_UPGRADE_TEMPLATES_1C914B77 module;
+    PKP_VARIABLE_TEMPLATES_DA3606FF("Pkp Variable Templates<br/><small>2 nodes</small>")
+    class PKP_VARIABLE_TEMPLATES_DA3606FF module;
+    CLI_SKILLS_9964CBB8 -.-> BUILDREMOTEREGISTRYSH_EXTRACTVERSIONS_NORMALIZEW_8A20F8A7
+    BUILDREMOTEREGISTRYSH_EXTRACTVERSIONS_NORMALIZEW_8A20F8A7 -.-> PKP_PATCH_TEMPLATES_9ED235F4
+    PKP_PATCH_TEMPLATES_9ED235F4 -.-> PKP_MIGRATE_TEMPLATES_8D359015
+    PKP_MIGRATE_TEMPLATES_8D359015 -.-> PKP_PRE_START_BA1FA92C
+    PKP_PRE_START_BA1FA92C -.-> PKP_RUN_SCHEDULED_A23C5099
+    PKP_RUN_SCHEDULED_A23C5099 -.-> PKP_START_TEMPLATES_CC71115A
+    PKP_START_TEMPLATES_CC71115A -.-> PKP_UPGRADE_TEMPLATES_1C914B77
+    PKP_UPGRADE_TEMPLATES_1C914B77 -.-> PKP_VARIABLE_TEMPLATES_DA3606FF
+    classDef entry fill:#422006,stroke:#fbbf24,color:#fde68a,stroke-width:1px;
+    classDef api fill:#450a0a,stroke:#f87171,color:#fee2e2,stroke-width:1px;
+    classDef async fill:#2e1065,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
+    classDef klass fill:#064e3b,stroke:#34d399,color:#d1fae5,stroke-width:1px;
+    classDef ui fill:#831843,stroke:#f472b6,color:#fce7f3,stroke-width:1px;
+    classDef module fill:#172554,stroke:#60a5fa,color:#dbeafe,stroke-width:1px;
+    classDef test fill:#3f3f46,stroke:#a1a1aa,color:#f4f4f5,stroke-width:1px;
+    classDef concept fill:#292524,stroke:#a8a29e,color:#fafaf9,stroke-dasharray:4 3;
+    classDef function fill:#0f172a,stroke:#38bdf8,color:#e0f2fe,stroke-width:1px;
+</div>
+
+<div class="grid">
+  <div class="card">
+    <h4>Architecture Layers</h4>
+    <table style="width:100%;font-size:0.85rem;">
+      <tr><th>Layer</th><th>Nodes</th><th>Communities</th></tr>
+      <tr><td>CLI &amp; Skill Installers</td><td>2</td><td><code>2</code></td></tr><tr><td>Buildremoteregistrysh Extractversions Normalizewebserver</td><td>7</td><td><code>0</code></td></tr><tr><td>Pkp Patch Templates</td><td>4</td><td><code>1</code></td></tr><tr><td>Pkp Migrate Templates</td><td>2</td><td><code>3</code></td></tr><tr><td>Pkp Pre Start</td><td>2</td><td><code>4</code></td></tr><tr><td>Pkp Run Scheduled</td><td>2</td><td><code>5</code></td></tr><tr><td>Pkp Start Templates</td><td>2</td><td><code>6</code></td></tr><tr><td>Pkp Upgrade Templates</td><td>2</td><td><code>7</code></td></tr><tr><td>Pkp Variable Templates</td><td>2</td><td><code>8</code></td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <h4>Core Flow</h4>
+    <div class="arrow-chain">CLI &amp; Skill Installers -&gt; Buildremoteregistrysh Extractversions Normalizewebserver -&gt; Pkp Patch Templates -&gt; Pkp Migrate Templates -&gt; Pkp Pre Start -&gt; Pkp Run Scheduled -&gt; Pkp Start Templates</div>
+  </div>
+</div>
+<hr>
+<!-- ====== 2. CLI & Skill Installers ====== -->
+<h2 id="cli-skills">2. CLI &amp; Skill Installers</h2>
+<p>CLI &amp; Skill Installers groups implementation around pkp, cli, install, templates, mostly in local/bin/pkp-cli-install. This section covers 2 nodes and 1 internal edges; the diagram shows only representative relationships to stay readable.</p>
+
+<div class="mermaid">
+%%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
+flowchart LR
+    %% Section: CLI &amp; Skill Installers (2 nodes, 1 edges)
+    templates_pkp_root_usr_local_bin_pkp_cli_install_cad9e283("pkp-cli-install")
+    templates_pkp_root_usr_local_bin_pkp_cli_install_0169f92b("pkp-cli-install script<br/><small>local/bin/pkp-cli-install</small>")
+    templates_pkp_root_usr_local_bin_pkp_cli_install_cad9e283 -->|contains| templates_pkp_root_usr_local_bin_pkp_cli_install_0169f92b
+    class templates_pkp_root_usr_local_bin_pkp_cli_install_cad9e283 entry;
+    class templates_pkp_root_usr_local_bin_pkp_cli_install_0169f92b entry;
+    classDef entry fill:#422006,stroke:#fbbf24,color:#fde68a,stroke-width:1px;
+    classDef api fill:#450a0a,stroke:#f87171,color:#fee2e2,stroke-width:1px;
+    classDef async fill:#2e1065,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
+    classDef klass fill:#064e3b,stroke:#34d399,color:#d1fae5,stroke-width:1px;
+    classDef ui fill:#831843,stroke:#f472b6,color:#fce7f3,stroke-width:1px;
+    classDef module fill:#172554,stroke:#60a5fa,color:#dbeafe,stroke-width:1px;
+    classDef test fill:#3f3f46,stroke:#a1a1aa,color:#f4f4f5,stroke-width:1px;
+    classDef concept fill:#292524,stroke:#a8a29e,color:#fafaf9,stroke-dasharray:4 3;
+    classDef function fill:#0f172a,stroke:#38bdf8,color:#e0f2fe,stroke-width:1px;
+</div>
+
+<h3>Call Details</h3>
+<table class="call-table">
+<tr>
+  <th style="width:5%">#</th>
+  <th style="width:28%">Node</th>
+  <th style="width:10%">Type</th>
+  <th style="width:17%">Caller</th>
+  <th style="width:20%">Callees</th>
+  <th style="width:20%">Description</th>
+</tr>
+<tr>
+  <td>1</td>
+  <td><code>pkp-cli-install</code><br><small style="color:var(--muted)">local/bin/pkp-cli-install</small></td>
+  <td><span class="tag tag-cmd">Entry</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>pkp-cli-install node in local/bin/pkp-cli-install.</td>
+</tr>
+<tr>
+  <td>2</td>
+  <td><code>pkp-cli-install script</code><br><small style="color:var(--muted)">local/bin/pkp-cli-install</small></td>
+  <td><span class="tag tag-cmd">Entry</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>pkp-cli-install script node in local/bin/pkp-cli-install.</td>
+</tr>
+</table>
+
+<div class="grid">
+  <div class="card">
+    <h4>Key Files</h4>
+    <table style="width:100%;font-size:0.85rem;">
+      <tr><th>File</th><th>Coverage</th></tr>
+      <tr><td><code>local/bin/pkp-cli-install</code></td><td>2 nodes</td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <h4>Design Notes</h4>
+    <p>This section comes from graphify community clustering. Relationship summary: contains x1. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
+  </div>
+</div>
+<hr>
+
+<!-- ====== 3. Buildremoteregistrysh Extractversions Normalizewebserver ====== -->
+<h2 id="buildremoteregistrysh-extractversions-normalizew">3. Buildremoteregistrysh Extractversions Normalizewebserver</h2>
+<p>Buildremoteregistrysh Extractversions Normalizewebserver groups implementation around buildremoteregistrysh, extractversions, normalizewebserver, pushalias, mostly in buildRemoteRegistry.sh. This section covers 7 nodes and 11 internal edges; the diagram shows only representative relationships to stay readable.</p>
+
+<div class="mermaid">
+%%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
+flowchart LR
+    %% Section: Buildremoteregistrysh Extractversions Normalizewebserver (7 nodes, 11 edges)
+    buildremoteregistry_main_5f55396e("main()<br/><small>buildRemoteRegistry.sh</small>")
+    buildremoteregistry_sh_entry_a0defaa1("buildRemoteRegistry.sh script<br/><small>buildRemoteRegistry.sh</small>")
+    buildremoteregistry_pushalias_17dc0cba("pushAlias()<br/><small>buildRemoteRegistry.sh</small>")
+    buildremoteregistry_normalizewebserver_41565a03("normalizeWebServer()<br/><small>buildRemoteRegistry.sh</small>")
+    buildremoteregistry_extractversions_09fb7be9("extractVersions()<br/><small>buildRemoteRegistry.sh</small>")
+    buildremoteregistry_showbuildparameters_65e5e953("showBuildParameters()<br/><small>buildRemoteRegistry.sh</small>")
+    buildremoteregistry_3a3f46e5("buildRemoteRegistry.sh")
+    buildremoteregistry_main_5f55396e -->|calls| buildremoteregistry_pushalias_17dc0cba
+    buildremoteregistry_main_5f55396e -->|calls| buildremoteregistry_normalizewebserver_41565a03
+    buildremoteregistry_main_5f55396e -->|calls| buildremoteregistry_extractversions_09fb7be9
+    buildremoteregistry_main_5f55396e -->|calls| buildremoteregistry_showbuildparameters_65e5e953
+    buildremoteregistry_sh_entry_a0defaa1 -->|calls| buildremoteregistry_main_5f55396e
+    class buildremoteregistry_main_5f55396e function;
+    class buildremoteregistry_sh_entry_a0defaa1 function;
+    class buildremoteregistry_pushalias_17dc0cba function;
+    class buildremoteregistry_normalizewebserver_41565a03 function;
+    class buildremoteregistry_extractversions_09fb7be9 function;
+    class buildremoteregistry_showbuildparameters_65e5e953 function;
+    class buildremoteregistry_3a3f46e5 function;
+    classDef entry fill:#422006,stroke:#fbbf24,color:#fde68a,stroke-width:1px;
+    classDef api fill:#450a0a,stroke:#f87171,color:#fee2e2,stroke-width:1px;
+    classDef async fill:#2e1065,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
+    classDef klass fill:#064e3b,stroke:#34d399,color:#d1fae5,stroke-width:1px;
+    classDef ui fill:#831843,stroke:#f472b6,color:#fce7f3,stroke-width:1px;
+    classDef module fill:#172554,stroke:#60a5fa,color:#dbeafe,stroke-width:1px;
+    classDef test fill:#3f3f46,stroke:#a1a1aa,color:#f4f4f5,stroke-width:1px;
+    classDef concept fill:#292524,stroke:#a8a29e,color:#fafaf9,stroke-dasharray:4 3;
+    classDef function fill:#0f172a,stroke:#38bdf8,color:#e0f2fe,stroke-width:1px;
+</div>
+
+<h3>Call Details</h3>
+<table class="call-table">
+<tr>
+  <th style="width:5%">#</th>
+  <th style="width:28%">Node</th>
+  <th style="width:10%">Type</th>
+  <th style="width:17%">Caller</th>
+  <th style="width:20%">Callees</th>
+  <th style="width:20%">Description</th>
+</tr>
+<tr>
+  <td>1</td>
+  <td><code>buildRemoteRegistry.sh</code><br><small style="color:var(--muted)">buildRemoteRegistry.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>buildRemoteRegistry.sh node in buildRemoteRegistry.sh.</td>
+</tr>
+<tr>
+  <td>2</td>
+  <td><code>extractVersions()</code><br><small style="color:var(--muted)">buildRemoteRegistry.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td><code>main()</code><br><small style="color:var(--muted)">buildRemoteRegistry.sh</small></td>
+  <td>No direct outbound edge</td>
+  <td>extractVersions() node in buildRemoteRegistry.sh.</td>
+</tr>
+<tr>
+  <td>3</td>
+  <td><code>main()</code><br><small style="color:var(--muted)">buildRemoteRegistry.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td><code>buildRemoteRegistry.sh script</code><br><small style="color:var(--muted)">buildRemoteRegistry.sh</small></td>
+  <td><code>extractVersions()</code><br><small style="color:var(--muted)">buildRemoteRegistry.sh</small><br><code>normalizeWebServer()</code><br><small style="color:var(--muted)">buildRemoteRegistry.sh</small><br><code>pushAlias()</code><br><small style="color:var(--muted)">buildRemoteRegistry.sh</small><br>+1 more</td>
+  <td>main() node in buildRemoteRegistry.sh.</td>
+</tr>
+<tr>
+  <td>4</td>
+  <td><code>normalizeWebServer()</code><br><small style="color:var(--muted)">buildRemoteRegistry.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td><code>main()</code><br><small style="color:var(--muted)">buildRemoteRegistry.sh</small></td>
+  <td>No direct outbound edge</td>
+  <td>normalizeWebServer() node in buildRemoteRegistry.sh.</td>
+</tr>
+<tr>
+  <td>5</td>
+  <td><code>pushAlias()</code><br><small style="color:var(--muted)">buildRemoteRegistry.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td><code>main()</code><br><small style="color:var(--muted)">buildRemoteRegistry.sh</small></td>
+  <td>No direct outbound edge</td>
+  <td>pushAlias() node in buildRemoteRegistry.sh.</td>
+</tr>
+<tr>
+  <td>6</td>
+  <td><code>buildRemoteRegistry.sh script</code><br><small style="color:var(--muted)">buildRemoteRegistry.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td><code>main()</code><br><small style="color:var(--muted)">buildRemoteRegistry.sh</small></td>
+  <td>buildRemoteRegistry.sh script node in buildRemoteRegistry.sh.</td>
+</tr>
+<tr>
+  <td>7</td>
+  <td><code>showBuildParameters()</code><br><small style="color:var(--muted)">buildRemoteRegistry.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td><code>main()</code><br><small style="color:var(--muted)">buildRemoteRegistry.sh</small></td>
+  <td>No direct outbound edge</td>
+  <td>showBuildParameters() node in buildRemoteRegistry.sh.</td>
+</tr>
+</table>
+
+<div class="grid">
+  <div class="card">
+    <h4>Key Files</h4>
+    <table style="width:100%;font-size:0.85rem;">
+      <tr><th>File</th><th>Coverage</th></tr>
+      <tr><td><code>buildRemoteRegistry.sh</code></td><td>7 nodes</td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <h4>Design Notes</h4>
+    <p>This section comes from graphify community clustering. Relationship summary: defines x5, calls x5, contains x1. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
+  </div>
+</div>
+<hr>
+
+<!-- ====== 4. Pkp Patch Templates ====== -->
+<h2 id="pkp-patch-templates">4. Pkp Patch Templates</h2>
+<p>Pkp Patch Templates groups implementation around pkp, patch, templates, root, mostly in local/bin/pkp-patch. This section covers 4 nodes and 5 internal edges; the diagram shows only representative relationships to stay readable.</p>
+
+<div class="mermaid">
+%%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
+flowchart LR
+    %% Section: Pkp Patch Templates (4 nodes, 5 edges)
+    templates_pkp_root_usr_local_bin_pkp_patch_entry_90ba81fe("pkp-patch script<br/><small>local/bin/pkp-patch</small>")
+    templates_pkp_root_usr_local_bin_pkp_patch_main_b07c94b6("main()<br/><small>local/bin/pkp-patch</small>")
+    templates_pkp_root_usr_local_bin_pkp_patch_apply_e790bd81("applyPatch()<br/><small>local/bin/pkp-patch</small>")
+    templates_pkp_root_usr_local_bin_pkp_patch_44b5984a("pkp-patch")
+    templates_pkp_root_usr_local_bin_pkp_patch_entry_90ba81fe -->|calls| templates_pkp_root_usr_local_bin_pkp_patch_main_b07c94b6
+    templates_pkp_root_usr_local_bin_pkp_patch_main_b07c94b6 -->|calls| templates_pkp_root_usr_local_bin_pkp_patch_apply_e790bd81
+    class templates_pkp_root_usr_local_bin_pkp_patch_entry_90ba81fe function;
+    class templates_pkp_root_usr_local_bin_pkp_patch_main_b07c94b6 function;
+    class templates_pkp_root_usr_local_bin_pkp_patch_apply_e790bd81 function;
+    class templates_pkp_root_usr_local_bin_pkp_patch_44b5984a function;
+    classDef entry fill:#422006,stroke:#fbbf24,color:#fde68a,stroke-width:1px;
+    classDef api fill:#450a0a,stroke:#f87171,color:#fee2e2,stroke-width:1px;
+    classDef async fill:#2e1065,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
+    classDef klass fill:#064e3b,stroke:#34d399,color:#d1fae5,stroke-width:1px;
+    classDef ui fill:#831843,stroke:#f472b6,color:#fce7f3,stroke-width:1px;
+    classDef module fill:#172554,stroke:#60a5fa,color:#dbeafe,stroke-width:1px;
+    classDef test fill:#3f3f46,stroke:#a1a1aa,color:#f4f4f5,stroke-width:1px;
+    classDef concept fill:#292524,stroke:#a8a29e,color:#fafaf9,stroke-dasharray:4 3;
+    classDef function fill:#0f172a,stroke:#38bdf8,color:#e0f2fe,stroke-width:1px;
+</div>
+
+<h3>Call Details</h3>
+<table class="call-table">
+<tr>
+  <th style="width:5%">#</th>
+  <th style="width:28%">Node</th>
+  <th style="width:10%">Type</th>
+  <th style="width:17%">Caller</th>
+  <th style="width:20%">Callees</th>
+  <th style="width:20%">Description</th>
+</tr>
+<tr>
+  <td>1</td>
+  <td><code>pkp-patch</code><br><small style="color:var(--muted)">local/bin/pkp-patch</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>pkp-patch node in local/bin/pkp-patch.</td>
+</tr>
+<tr>
+  <td>2</td>
+  <td><code>pkp-patch script</code><br><small style="color:var(--muted)">local/bin/pkp-patch</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td><code>main()</code><br><small style="color:var(--muted)">local/bin/pkp-patch</small></td>
+  <td>pkp-patch script node in local/bin/pkp-patch.</td>
+</tr>
+<tr>
+  <td>3</td>
+  <td><code>applyPatch()</code><br><small style="color:var(--muted)">local/bin/pkp-patch</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td><code>main()</code><br><small style="color:var(--muted)">local/bin/pkp-patch</small></td>
+  <td>No direct outbound edge</td>
+  <td>applyPatch() node in local/bin/pkp-patch.</td>
+</tr>
+<tr>
+  <td>4</td>
+  <td><code>main()</code><br><small style="color:var(--muted)">local/bin/pkp-patch</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td><code>pkp-patch script</code><br><small style="color:var(--muted)">local/bin/pkp-patch</small></td>
+  <td><code>applyPatch()</code><br><small style="color:var(--muted)">local/bin/pkp-patch</small></td>
+  <td>main() node in local/bin/pkp-patch.</td>
+</tr>
+</table>
+
+<div class="grid">
+  <div class="card">
+    <h4>Key Files</h4>
+    <table style="width:100%;font-size:0.85rem;">
+      <tr><th>File</th><th>Coverage</th></tr>
+      <tr><td><code>local/bin/pkp-patch</code></td><td>4 nodes</td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <h4>Design Notes</h4>
+    <p>This section comes from graphify community clustering. Relationship summary: defines x2, calls x2, contains x1. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
+  </div>
+</div>
+<hr>
+
+<!-- ====== 5. Pkp Migrate Templates ====== -->
+<h2 id="pkp-migrate-templates">5. Pkp Migrate Templates</h2>
+<p>Pkp Migrate Templates groups implementation around pkp, migrate, templates, root, mostly in local/bin/pkp-migrate. This section covers 2 nodes and 1 internal edges; the diagram shows only representative relationships to stay readable.</p>
+
+<div class="mermaid">
+%%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
+flowchart LR
+    %% Section: Pkp Migrate Templates (2 nodes, 1 edges)
+    templates_pkp_root_usr_local_bin_pkp_migrate_a81891c4("pkp-migrate")
+    templates_pkp_root_usr_local_bin_pkp_migrate_ent_5ef46ee4("pkp-migrate script<br/><small>local/bin/pkp-migrate</small>")
+    templates_pkp_root_usr_local_bin_pkp_migrate_a81891c4 -->|contains| templates_pkp_root_usr_local_bin_pkp_migrate_ent_5ef46ee4
+    class templates_pkp_root_usr_local_bin_pkp_migrate_a81891c4 function;
+    class templates_pkp_root_usr_local_bin_pkp_migrate_ent_5ef46ee4 function;
+    classDef entry fill:#422006,stroke:#fbbf24,color:#fde68a,stroke-width:1px;
+    classDef api fill:#450a0a,stroke:#f87171,color:#fee2e2,stroke-width:1px;
+    classDef async fill:#2e1065,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
+    classDef klass fill:#064e3b,stroke:#34d399,color:#d1fae5,stroke-width:1px;
+    classDef ui fill:#831843,stroke:#f472b6,color:#fce7f3,stroke-width:1px;
+    classDef module fill:#172554,stroke:#60a5fa,color:#dbeafe,stroke-width:1px;
+    classDef test fill:#3f3f46,stroke:#a1a1aa,color:#f4f4f5,stroke-width:1px;
+    classDef concept fill:#292524,stroke:#a8a29e,color:#fafaf9,stroke-dasharray:4 3;
+    classDef function fill:#0f172a,stroke:#38bdf8,color:#e0f2fe,stroke-width:1px;
+</div>
+
+<h3>Call Details</h3>
+<table class="call-table">
+<tr>
+  <th style="width:5%">#</th>
+  <th style="width:28%">Node</th>
+  <th style="width:10%">Type</th>
+  <th style="width:17%">Caller</th>
+  <th style="width:20%">Callees</th>
+  <th style="width:20%">Description</th>
+</tr>
+<tr>
+  <td>1</td>
+  <td><code>pkp-migrate</code><br><small style="color:var(--muted)">local/bin/pkp-migrate</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>pkp-migrate node in local/bin/pkp-migrate.</td>
+</tr>
+<tr>
+  <td>2</td>
+  <td><code>pkp-migrate script</code><br><small style="color:var(--muted)">local/bin/pkp-migrate</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>pkp-migrate script node in local/bin/pkp-migrate.</td>
+</tr>
+</table>
+
+<div class="grid">
+  <div class="card">
+    <h4>Key Files</h4>
+    <table style="width:100%;font-size:0.85rem;">
+      <tr><th>File</th><th>Coverage</th></tr>
+      <tr><td><code>local/bin/pkp-migrate</code></td><td>2 nodes</td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <h4>Design Notes</h4>
+    <p>This section comes from graphify community clustering. Relationship summary: contains x1. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
+  </div>
+</div>
+<hr>
+
+<!-- ====== 6. Pkp Pre Start ====== -->
+<h2 id="pkp-pre-start">6. Pkp Pre Start</h2>
+<p>Pkp Pre Start groups implementation around pkp, pre, start, templates, mostly in local/bin/pkp-pre-start. This section covers 2 nodes and 1 internal edges; the diagram shows only representative relationships to stay readable.</p>
+
+<div class="mermaid">
+%%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
+flowchart LR
+    %% Section: Pkp Pre Start (2 nodes, 1 edges)
+    templates_pkp_root_usr_local_bin_pkp_pre_start_d5aa9fc4("pkp-pre-start")
+    templates_pkp_root_usr_local_bin_pkp_pre_start_e_b730e766("pkp-pre-start script<br/><small>local/bin/pkp-pre-start</small>")
+    templates_pkp_root_usr_local_bin_pkp_pre_start_d5aa9fc4 -->|contains| templates_pkp_root_usr_local_bin_pkp_pre_start_e_b730e766
+    class templates_pkp_root_usr_local_bin_pkp_pre_start_d5aa9fc4 function;
+    class templates_pkp_root_usr_local_bin_pkp_pre_start_e_b730e766 function;
+    classDef entry fill:#422006,stroke:#fbbf24,color:#fde68a,stroke-width:1px;
+    classDef api fill:#450a0a,stroke:#f87171,color:#fee2e2,stroke-width:1px;
+    classDef async fill:#2e1065,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
+    classDef klass fill:#064e3b,stroke:#34d399,color:#d1fae5,stroke-width:1px;
+    classDef ui fill:#831843,stroke:#f472b6,color:#fce7f3,stroke-width:1px;
+    classDef module fill:#172554,stroke:#60a5fa,color:#dbeafe,stroke-width:1px;
+    classDef test fill:#3f3f46,stroke:#a1a1aa,color:#f4f4f5,stroke-width:1px;
+    classDef concept fill:#292524,stroke:#a8a29e,color:#fafaf9,stroke-dasharray:4 3;
+    classDef function fill:#0f172a,stroke:#38bdf8,color:#e0f2fe,stroke-width:1px;
+</div>
+
+<h3>Call Details</h3>
+<table class="call-table">
+<tr>
+  <th style="width:5%">#</th>
+  <th style="width:28%">Node</th>
+  <th style="width:10%">Type</th>
+  <th style="width:17%">Caller</th>
+  <th style="width:20%">Callees</th>
+  <th style="width:20%">Description</th>
+</tr>
+<tr>
+  <td>1</td>
+  <td><code>pkp-pre-start</code><br><small style="color:var(--muted)">local/bin/pkp-pre-start</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>pkp-pre-start node in local/bin/pkp-pre-start.</td>
+</tr>
+<tr>
+  <td>2</td>
+  <td><code>pkp-pre-start script</code><br><small style="color:var(--muted)">local/bin/pkp-pre-start</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>pkp-pre-start script node in local/bin/pkp-pre-start.</td>
+</tr>
+</table>
+
+<div class="grid">
+  <div class="card">
+    <h4>Key Files</h4>
+    <table style="width:100%;font-size:0.85rem;">
+      <tr><th>File</th><th>Coverage</th></tr>
+      <tr><td><code>local/bin/pkp-pre-start</code></td><td>2 nodes</td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <h4>Design Notes</h4>
+    <p>This section comes from graphify community clustering. Relationship summary: contains x1. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
+  </div>
+</div>
+<hr>
+
+<!-- ====== 7. Pkp Run Scheduled ====== -->
+<h2 id="pkp-run-scheduled">7. Pkp Run Scheduled</h2>
+<p>Pkp Run Scheduled groups implementation around pkp, run, scheduled, templates, mostly in local/bin/pkp-run-scheduled. This section covers 2 nodes and 1 internal edges; the diagram shows only representative relationships to stay readable.</p>
+
+<div class="mermaid">
+%%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
+flowchart LR
+    %% Section: Pkp Run Scheduled (2 nodes, 1 edges)
+    templates_pkp_root_usr_local_bin_pkp_run_schedul_18c4b508("pkp-run-scheduled")
+    templates_pkp_root_usr_local_bin_pkp_run_schedul_664a9d49("pkp-run-scheduled script<br/><small>local/bin/pkp-run-scheduled</small>")
+    templates_pkp_root_usr_local_bin_pkp_run_schedul_18c4b508 -->|contains| templates_pkp_root_usr_local_bin_pkp_run_schedul_664a9d49
+    class templates_pkp_root_usr_local_bin_pkp_run_schedul_18c4b508 function;
+    class templates_pkp_root_usr_local_bin_pkp_run_schedul_664a9d49 function;
+    classDef entry fill:#422006,stroke:#fbbf24,color:#fde68a,stroke-width:1px;
+    classDef api fill:#450a0a,stroke:#f87171,color:#fee2e2,stroke-width:1px;
+    classDef async fill:#2e1065,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
+    classDef klass fill:#064e3b,stroke:#34d399,color:#d1fae5,stroke-width:1px;
+    classDef ui fill:#831843,stroke:#f472b6,color:#fce7f3,stroke-width:1px;
+    classDef module fill:#172554,stroke:#60a5fa,color:#dbeafe,stroke-width:1px;
+    classDef test fill:#3f3f46,stroke:#a1a1aa,color:#f4f4f5,stroke-width:1px;
+    classDef concept fill:#292524,stroke:#a8a29e,color:#fafaf9,stroke-dasharray:4 3;
+    classDef function fill:#0f172a,stroke:#38bdf8,color:#e0f2fe,stroke-width:1px;
+</div>
+
+<h3>Call Details</h3>
+<table class="call-table">
+<tr>
+  <th style="width:5%">#</th>
+  <th style="width:28%">Node</th>
+  <th style="width:10%">Type</th>
+  <th style="width:17%">Caller</th>
+  <th style="width:20%">Callees</th>
+  <th style="width:20%">Description</th>
+</tr>
+<tr>
+  <td>1</td>
+  <td><code>pkp-run-scheduled</code><br><small style="color:var(--muted)">local/bin/pkp-run-scheduled</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>pkp-run-scheduled node in local/bin/pkp-run-scheduled.</td>
+</tr>
+<tr>
+  <td>2</td>
+  <td><code>pkp-run-scheduled script</code><br><small style="color:var(--muted)">local/bin/pkp-run-scheduled</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>pkp-run-scheduled script node in local/bin/pkp-run-scheduled.</td>
+</tr>
+</table>
+
+<div class="grid">
+  <div class="card">
+    <h4>Key Files</h4>
+    <table style="width:100%;font-size:0.85rem;">
+      <tr><th>File</th><th>Coverage</th></tr>
+      <tr><td><code>local/bin/pkp-run-scheduled</code></td><td>2 nodes</td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <h4>Design Notes</h4>
+    <p>This section comes from graphify community clustering. Relationship summary: contains x1. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
+  </div>
+</div>
+<hr>
+
+<!-- ====== 8. Pkp Start Templates ====== -->
+<h2 id="pkp-start-templates">8. Pkp Start Templates</h2>
+<p>Pkp Start Templates groups implementation around pkp, start, templates, root, mostly in local/bin/pkp-start. This section covers 2 nodes and 1 internal edges; the diagram shows only representative relationships to stay readable.</p>
+
+<div class="mermaid">
+%%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
+flowchart LR
+    %% Section: Pkp Start Templates (2 nodes, 1 edges)
+    templates_pkp_root_usr_local_bin_pkp_start_1fd88fcb("pkp-start")
+    templates_pkp_root_usr_local_bin_pkp_start_entry_68e185c7("pkp-start script<br/><small>local/bin/pkp-start</small>")
+    templates_pkp_root_usr_local_bin_pkp_start_1fd88fcb -->|contains| templates_pkp_root_usr_local_bin_pkp_start_entry_68e185c7
+    class templates_pkp_root_usr_local_bin_pkp_start_1fd88fcb function;
+    class templates_pkp_root_usr_local_bin_pkp_start_entry_68e185c7 function;
+    classDef entry fill:#422006,stroke:#fbbf24,color:#fde68a,stroke-width:1px;
+    classDef api fill:#450a0a,stroke:#f87171,color:#fee2e2,stroke-width:1px;
+    classDef async fill:#2e1065,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
+    classDef klass fill:#064e3b,stroke:#34d399,color:#d1fae5,stroke-width:1px;
+    classDef ui fill:#831843,stroke:#f472b6,color:#fce7f3,stroke-width:1px;
+    classDef module fill:#172554,stroke:#60a5fa,color:#dbeafe,stroke-width:1px;
+    classDef test fill:#3f3f46,stroke:#a1a1aa,color:#f4f4f5,stroke-width:1px;
+    classDef concept fill:#292524,stroke:#a8a29e,color:#fafaf9,stroke-dasharray:4 3;
+    classDef function fill:#0f172a,stroke:#38bdf8,color:#e0f2fe,stroke-width:1px;
+</div>
+
+<h3>Call Details</h3>
+<table class="call-table">
+<tr>
+  <th style="width:5%">#</th>
+  <th style="width:28%">Node</th>
+  <th style="width:10%">Type</th>
+  <th style="width:17%">Caller</th>
+  <th style="width:20%">Callees</th>
+  <th style="width:20%">Description</th>
+</tr>
+<tr>
+  <td>1</td>
+  <td><code>pkp-start</code><br><small style="color:var(--muted)">local/bin/pkp-start</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>pkp-start node in local/bin/pkp-start.</td>
+</tr>
+<tr>
+  <td>2</td>
+  <td><code>pkp-start script</code><br><small style="color:var(--muted)">local/bin/pkp-start</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>pkp-start script node in local/bin/pkp-start.</td>
+</tr>
+</table>
+
+<div class="grid">
+  <div class="card">
+    <h4>Key Files</h4>
+    <table style="width:100%;font-size:0.85rem;">
+      <tr><th>File</th><th>Coverage</th></tr>
+      <tr><td><code>local/bin/pkp-start</code></td><td>2 nodes</td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <h4>Design Notes</h4>
+    <p>This section comes from graphify community clustering. Relationship summary: contains x1. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
+  </div>
+</div>
+<hr>
+
+<!-- ====== 9. Pkp Upgrade Templates ====== -->
+<h2 id="pkp-upgrade-templates">9. Pkp Upgrade Templates</h2>
+<p>Pkp Upgrade Templates groups implementation around pkp, upgrade, templates, root, mostly in local/bin/pkp-upgrade. This section covers 2 nodes and 1 internal edges; the diagram shows only representative relationships to stay readable.</p>
+
+<div class="mermaid">
+%%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
+flowchart LR
+    %% Section: Pkp Upgrade Templates (2 nodes, 1 edges)
+    templates_pkp_root_usr_local_bin_pkp_upgrade_ec0366f7("pkp-upgrade")
+    templates_pkp_root_usr_local_bin_pkp_upgrade_ent_8406e915("pkp-upgrade script<br/><small>local/bin/pkp-upgrade</small>")
+    templates_pkp_root_usr_local_bin_pkp_upgrade_ec0366f7 -->|contains| templates_pkp_root_usr_local_bin_pkp_upgrade_ent_8406e915
+    class templates_pkp_root_usr_local_bin_pkp_upgrade_ec0366f7 function;
+    class templates_pkp_root_usr_local_bin_pkp_upgrade_ent_8406e915 function;
+    classDef entry fill:#422006,stroke:#fbbf24,color:#fde68a,stroke-width:1px;
+    classDef api fill:#450a0a,stroke:#f87171,color:#fee2e2,stroke-width:1px;
+    classDef async fill:#2e1065,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
+    classDef klass fill:#064e3b,stroke:#34d399,color:#d1fae5,stroke-width:1px;
+    classDef ui fill:#831843,stroke:#f472b6,color:#fce7f3,stroke-width:1px;
+    classDef module fill:#172554,stroke:#60a5fa,color:#dbeafe,stroke-width:1px;
+    classDef test fill:#3f3f46,stroke:#a1a1aa,color:#f4f4f5,stroke-width:1px;
+    classDef concept fill:#292524,stroke:#a8a29e,color:#fafaf9,stroke-dasharray:4 3;
+    classDef function fill:#0f172a,stroke:#38bdf8,color:#e0f2fe,stroke-width:1px;
+</div>
+
+<h3>Call Details</h3>
+<table class="call-table">
+<tr>
+  <th style="width:5%">#</th>
+  <th style="width:28%">Node</th>
+  <th style="width:10%">Type</th>
+  <th style="width:17%">Caller</th>
+  <th style="width:20%">Callees</th>
+  <th style="width:20%">Description</th>
+</tr>
+<tr>
+  <td>1</td>
+  <td><code>pkp-upgrade</code><br><small style="color:var(--muted)">local/bin/pkp-upgrade</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>pkp-upgrade node in local/bin/pkp-upgrade.</td>
+</tr>
+<tr>
+  <td>2</td>
+  <td><code>pkp-upgrade script</code><br><small style="color:var(--muted)">local/bin/pkp-upgrade</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>pkp-upgrade script node in local/bin/pkp-upgrade.</td>
+</tr>
+</table>
+
+<div class="grid">
+  <div class="card">
+    <h4>Key Files</h4>
+    <table style="width:100%;font-size:0.85rem;">
+      <tr><th>File</th><th>Coverage</th></tr>
+      <tr><td><code>local/bin/pkp-upgrade</code></td><td>2 nodes</td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <h4>Design Notes</h4>
+    <p>This section comes from graphify community clustering. Relationship summary: contains x1. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
+  </div>
+</div>
+<hr>
+
+<!-- ====== 10. Pkp Variable Templates ====== -->
+<h2 id="pkp-variable-templates">10. Pkp Variable Templates</h2>
+<p>Pkp Variable Templates groups implementation around pkp, variable, templates, root, mostly in local/bin/pkp-variable. This section covers 2 nodes and 1 internal edges; the diagram shows only representative relationships to stay readable.</p>
+
+<div class="mermaid">
+%%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
+flowchart LR
+    %% Section: Pkp Variable Templates (2 nodes, 1 edges)
+    templates_pkp_root_usr_local_bin_pkp_variable_34db2cc2("pkp-variable")
+    templates_pkp_root_usr_local_bin_pkp_variable_en_acb62ebe("pkp-variable script<br/><small>local/bin/pkp-variable</small>")
+    templates_pkp_root_usr_local_bin_pkp_variable_34db2cc2 -->|contains| templates_pkp_root_usr_local_bin_pkp_variable_en_acb62ebe
+    class templates_pkp_root_usr_local_bin_pkp_variable_34db2cc2 function;
+    class templates_pkp_root_usr_local_bin_pkp_variable_en_acb62ebe function;
+    classDef entry fill:#422006,stroke:#fbbf24,color:#fde68a,stroke-width:1px;
+    classDef api fill:#450a0a,stroke:#f87171,color:#fee2e2,stroke-width:1px;
+    classDef async fill:#2e1065,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
+    classDef klass fill:#064e3b,stroke:#34d399,color:#d1fae5,stroke-width:1px;
+    classDef ui fill:#831843,stroke:#f472b6,color:#fce7f3,stroke-width:1px;
+    classDef module fill:#172554,stroke:#60a5fa,color:#dbeafe,stroke-width:1px;
+    classDef test fill:#3f3f46,stroke:#a1a1aa,color:#f4f4f5,stroke-width:1px;
+    classDef concept fill:#292524,stroke:#a8a29e,color:#fafaf9,stroke-dasharray:4 3;
+    classDef function fill:#0f172a,stroke:#38bdf8,color:#e0f2fe,stroke-width:1px;
+</div>
+
+<h3>Call Details</h3>
+<table class="call-table">
+<tr>
+  <th style="width:5%">#</th>
+  <th style="width:28%">Node</th>
+  <th style="width:10%">Type</th>
+  <th style="width:17%">Caller</th>
+  <th style="width:20%">Callees</th>
+  <th style="width:20%">Description</th>
+</tr>
+<tr>
+  <td>1</td>
+  <td><code>pkp-variable</code><br><small style="color:var(--muted)">local/bin/pkp-variable</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>pkp-variable node in local/bin/pkp-variable.</td>
+</tr>
+<tr>
+  <td>2</td>
+  <td><code>pkp-variable script</code><br><small style="color:var(--muted)">local/bin/pkp-variable</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>pkp-variable script node in local/bin/pkp-variable.</td>
+</tr>
+</table>
+
+<div class="grid">
+  <div class="card">
+    <h4>Key Files</h4>
+    <table style="width:100%;font-size:0.85rem;">
+      <tr><th>File</th><th>Coverage</th></tr>
+      <tr><td><code>local/bin/pkp-variable</code></td><td>2 nodes</td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <h4>Design Notes</h4>
+    <p>This section comes from graphify community clustering. Relationship summary: contains x1. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
+  </div>
+</div>
+<hr>
+
+<h2 id="stats">Project Statistics</h2>
+
+<div class="grid">
+  <div class="card">
+    <h4>Graph</h4>
+    <table style="width:100%;font-size:0.85rem;">
+      <tr><td>Nodes</td><td>25</td></tr>
+      <tr><td>Edges</td><td>23</td></tr>
+      <tr><td>Hyperedges</td><td>0</td></tr>
+      <tr><td>Communities</td><td>9</td></tr>
+      <tr><td>Documented Sections</td><td>9</td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <h4>Edge Confidence</h4>
+    <table style="width:100%;font-size:0.85rem;">
+      <tr><td>EXTRACTED</td><td>23</td></tr>
+      <tr><td>INFERRED</td><td>0</td></tr>
+      <tr><td>AMBIGUOUS</td><td>0</td></tr>
+    </table>
+  </div>
+</div>
+
+<div style="text-align:center; padding:40px 0; color: var(--muted); font-size:0.9rem;">
+  <p>Revista-PKP — Architecture Documentation</p>
+  <p>Generated: 2026-10-09 21:13 UTC · graphify callflow-html</p>
+</div>
+
+</div><!-- .container -->
+
+<script>
+(function () {
+  const mermaidConfig = {
+    startOnLoad: false,
+    theme: 'dark',
+    securityLevel: 'loose',
+    flowchart: { htmlLabels: true, useMaxWidth: true },
+    themeVariables: {
+      primaryColor: '#1e293b',
+      primaryTextColor: '#e2e8f0',
+      primaryBorderColor: '#38bdf8',
+      secondaryColor: '#0f172a',
+      tertiaryColor: '#334155',
+      lineColor: '#64748b',
+      textColor: '#e2e8f0',
+    }
+  };
+
+  mermaid.initialize(mermaidConfig);
+
+  function clamp(value, min, max) {
+    return Math.min(max, Math.max(min, value));
+  }
+
+  function enhanceMermaidDiagrams() {
+    document.querySelectorAll('.mermaid').forEach((container) => {
+      if (container.dataset.zoomReady === 'true') return;
+      const svg = container.querySelector('svg');
+      if (!svg) return;
+
+      container.dataset.zoomReady = 'true';
+      container.classList.add('is-enhanced');
+
+      const viewport = document.createElement('div');
+      viewport.className = 'mermaid-viewport';
+      svg.parentNode.insertBefore(viewport, svg);
+      viewport.appendChild(svg);
+
+      const toolbar = document.createElement('div');
+      toolbar.className = 'mermaid-toolbar';
+      toolbar.innerHTML = [
+        '<button type="button" data-action="zoom-out" title="Zoom out">-</button>',
+        '<span class="zoom-level" data-role="level">100%</span>',
+        '<button type="button" data-action="zoom-in" title="Zoom in">+</button>',
+        '<button type="button" data-action="fit" title="Fit width">Fit</button>',
+        '<button type="button" data-action="reset" title="Reset view">Reset</button>'
+      ].join('');
+      container.insertBefore(toolbar, viewport);
+
+      const state = { scale: 1, x: 0, y: 0, dragging: false, startX: 0, startY: 0, originX: 0, originY: 0 };
+      const level = toolbar.querySelector('[data-role="level"]');
+
+      function applyTransform() {
+        svg.style.transform = `translate(${state.x}px, ${state.y}px) scale(${state.scale})`;
+        level.textContent = `${Math.round(state.scale * 100)}%`;
+      }
+
+      function zoomBy(delta) {
+        state.scale = clamp(state.scale + delta, 0.25, 3);
+        applyTransform();
+      }
+
+      function reset() {
+        state.scale = 1;
+        state.x = 0;
+        state.y = 0;
+        applyTransform();
+      }
+
+      function fitWidth() {
+        const rawWidth = svg.viewBox && svg.viewBox.baseVal && svg.viewBox.baseVal.width
+          ? svg.viewBox.baseVal.width
+          : svg.getBoundingClientRect().width / state.scale;
+        if (!rawWidth) {
+          reset();
+          return;
+        }
+        state.scale = clamp((viewport.clientWidth - 48) / rawWidth, 0.25, 1.4);
+        state.x = 0;
+        state.y = 0;
+        applyTransform();
+      }
+
+      toolbar.addEventListener('click', (event) => {
+        const button = event.target.closest('button[data-action]');
+        if (!button) return;
+        const action = button.dataset.action;
+        if (action === 'zoom-in') zoomBy(0.15);
+        if (action === 'zoom-out') zoomBy(-0.15);
+        if (action === 'fit') fitWidth();
+        if (action === 'reset') reset();
+      });
+
+      viewport.addEventListener('wheel', (event) => {
+        if (!event.ctrlKey && !event.metaKey) return;
+        event.preventDefault();
+        zoomBy(event.deltaY < 0 ? 0.1 : -0.1);
+      }, { passive: false });
+
+      viewport.addEventListener('pointerdown', (event) => {
+        if (event.button !== 0) return;
+        state.dragging = true;
+        state.startX = event.clientX;
+        state.startY = event.clientY;
+        state.originX = state.x;
+        state.originY = state.y;
+        viewport.classList.add('is-dragging');
+        viewport.setPointerCapture(event.pointerId);
+      });
+
+      viewport.addEventListener('pointermove', (event) => {
+        if (!state.dragging) return;
+        state.x = state.originX + event.clientX - state.startX;
+        state.y = state.originY + event.clientY - state.startY;
+        applyTransform();
+      });
+
+      function endDrag(event) {
+        if (!state.dragging) return;
+        state.dragging = false;
+        viewport.classList.remove('is-dragging');
+        if (viewport.hasPointerCapture(event.pointerId)) {
+          viewport.releasePointerCapture(event.pointerId);
+        }
+      }
+
+      viewport.addEventListener('pointerup', endDrag);
+      viewport.addEventListener('pointercancel', endDrag);
+      applyTransform();
+    });
+  }
+
+  function renderMermaid() {
+    const result = mermaid.run
+      ? mermaid.run({ querySelector: '.mermaid' })
+      : Promise.resolve();
+    Promise.resolve(result)
+      .then(enhanceMermaidDiagrams)
+      .catch((error) => {
+        console.error('Mermaid render failed:', error);
+        enhanceMermaidDiagrams();
+      });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', renderMermaid);
+  } else {
+    renderMermaid();
+  }
+})();
+</script>
+
+</body>
+</html>

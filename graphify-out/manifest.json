@@ -1,0 +1,56 @@
+{
+  "buildRemoteRegistry.sh": {
+    "mtime": 1791405689.358748,
+    "seen": 1791580382.7644167,
+    "ast_hash": "3da237459c759dfb094ffaa083ac7d59",
+    "semantic_hash": "3da237459c759dfb094ffaa083ac7d59"
+  },
+  "templates/pkp/root/usr/local/bin/pkp-cli-install": {
+    "mtime": 1791405689.3595936,
+    "seen": 1791580382.7644188,
+    "ast_hash": "472bb725fb8dc643212c94a4f70b2be2",
+    "semantic_hash": "472bb725fb8dc643212c94a4f70b2be2"
+  },
+  "templates/pkp/root/usr/local/bin/pkp-migrate": {
+    "mtime": 1791405689.3595936,
+    "seen": 1791580382.7644198,
+    "ast_hash": "501e06830811c82ea340aa22714582ea",
+    "semantic_hash": "501e06830811c82ea340aa22714582ea"
+  },
+  "templates/pkp/root/usr/local/bin/pkp-patch": {
+    "mtime": 1791405689.3595936,
+    "seen": 1791580382.7644212,
+    "ast_hash": "438022083cd474aadd9be1c7a13021f1",
+    "semantic_hash": "438022083cd474aadd9be1c7a13021f1"
+  },
+  "templates/pkp/root/usr/local/bin/pkp-pre-start": {
+    "mtime": 1791405689.3595936,
+    "seen": 1791580382.7644227,
+    "ast_hash": "164e787a1276a84797badf28caa6c0d1",
+    "semantic_hash": "164e787a1276a84797badf28caa6c0d1"
+  },
+  "templates/pkp/root/usr/local/bin/pkp-run-scheduled": {
+    "mtime": 1791405689.3595936,
+    "seen": 1791580382.7644238,
+    "ast_hash": "f90395b037e7eb142b18907f5ac7f639",
+    "semantic_hash": "f90395b037e7eb142b18907f5ac7f639"
+  },
+  "templates/pkp/root/usr/local/bin/pkp-start": {
+    "mtime": 1791405689.3595936,
+    "seen": 1791580382.7644255,
+    "ast_hash": "1f6d3741593ae3e7748d524fa5be2633",
+    "semantic_hash": "1f6d3741593ae3e7748d524fa5be2633"
+  },
+  "templates/pkp/root/usr/local/bin/pkp-upgrade": {
+    "mtime": 1791405689.3595936,
+    "seen": 1791580382.7644322,
+    "ast_hash": "b3b63652721004921c01273b00d369f5",
+    "semantic_hash": "b3b63652721004921c01273b00d369f5"
+  },
+  "templates/pkp/root/usr/local/bin/pkp-variable": {
+    "mtime": 1791405689.3595936,
+    "seen": 1791580382.7644334,
+    "ast_hash": "958d0e7f2b8f4473d0387a0653371205",
+    "semantic_hash": "958d0e7f2b8f4473d0387a0653371205"
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "communities": {
+    "0": [
+      "buildremoteregistry",
+      "buildremoteregistry_extractversions",
+      "buildremoteregistry_main",
+      "buildremoteregistry_normalizewebserver",
+      "buildremoteregistry_pushalias",
+      "buildremoteregistry_sh__entry",
+      "buildremoteregistry_showbuildparameters"
+    ],
+    "1": [
+      "templates_pkp_root_usr_local_bin_pkp_patch",
+      "templates_pkp_root_usr_local_bin_pkp_patch__entry",
+      "templates_pkp_root_usr_local_bin_pkp_patch_applypatch",
+      "templates_pkp_root_usr_local_bin_pkp_patch_main"
+    ],
+    "2": [
+      "templates_pkp_root_usr_local_bin_pkp_cli_install",
+      "templates_pkp_root_usr_local_bin_pkp_cli_install__entry"
+    ],
+    "3": [
+      "templates_pkp_root_usr_local_bin_pkp_migrate",
+      "templates_pkp_root_usr_local_bin_pkp_migrate__entry"
+    ],
+    "4": [
+      "templates_pkp_root_usr_local_bin_pkp_pre_start",
+      "templates_pkp_root_usr_local_bin_pkp_pre_start__entry"
+    ],
+    "5": [
+      "templates_pkp_root_usr_local_bin_pkp_run_scheduled",
+      "templates_pkp_root_usr_local_bin_pkp_run_scheduled__entry"
+    ],
+    "6": [
+      "templates_pkp_root_usr_local_bin_pkp_start",
+      "templates_pkp_root_usr_local_bin_pkp_start__entry"
+    ],
+    "7": [
+      "templates_pkp_root_usr_local_bin_pkp_upgrade",
+      "templates_pkp_root_usr_local_bin_pkp_upgrade__entry"
+    ],
+    "8": [
+      "templates_pkp_root_usr_local_bin_pkp_variable",
+      "templates_pkp_root_usr_local_bin_pkp_variable__entry"
+    ]
+  },
+  "cohesion": {
+    "0": 0.5238095238095238,
+    "1": 0.8333333333333334,
+    "2": 1.0,
+    "3": 1.0,
+    "4": 1.0,
+    "5": 1.0,
+    "6": 1.0,
+    "7": 1.0,
+    "8": 1.0
+  },
+  "gods": [
+    {
+      "id": "buildremoteregistry_main",
+      "label": "main()",
+      "degree": 6
+    },
+    {
+      "id": "buildremoteregistry_sh__entry",
+      "label": "buildRemoteRegistry.sh script",
+      "degree": 2
+    },
+    {
+      "id": "buildremoteregistry_normalizewebserver",
+      "label": "normalizeWebServer()",
+      "degree": 2
+    },
+    {
+      "id": "buildremoteregistry_extractversions",
+      "label": "extractVersions()",
+      "degree": 2
+    },
+    {
+      "id": "buildremoteregistry_showbuildparameters",
+      "label": "showBuildParameters()",
+      "degree": 2
+    },
+    {
+      "id": "buildremoteregistry_pushalias",
+      "label": "pushAlias()",
+      "degree": 2
+    }
+  ],
+  "surprises": [],
+  "tokens": {
+    "input": 0,
+    "output": 0
+  }
+}

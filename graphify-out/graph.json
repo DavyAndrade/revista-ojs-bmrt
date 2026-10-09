@@ -1,0 +1,621 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "id": "buildremoteregistry",
+      "label": "buildRemoteRegistry.sh",
+      "_origin": "ast",
+      "community": 0,
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "buildremoteregistry.sh",
+      "source_file": "buildRemoteRegistry.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "buildremoteregistry_extractversions",
+      "label": "extractVersions()",
+      "_origin": "ast",
+      "community": 0,
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "norm_label": "extractversions()",
+      "source_file": "buildRemoteRegistry.sh",
+      "source_location": "L23"
+    },
+    {
+      "id": "buildremoteregistry_main",
+      "label": "main()",
+      "_origin": "ast",
+      "community": 0,
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "norm_label": "main()",
+      "source_file": "buildRemoteRegistry.sh",
+      "source_location": "L60"
+    },
+    {
+      "id": "buildremoteregistry_normalizewebserver",
+      "label": "normalizeWebServer()",
+      "_origin": "ast",
+      "community": 0,
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "norm_label": "normalizewebserver()",
+      "source_file": "buildRemoteRegistry.sh",
+      "source_location": "L15"
+    },
+    {
+      "id": "buildremoteregistry_pushalias",
+      "label": "pushAlias()",
+      "_origin": "ast",
+      "community": 0,
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "norm_label": "pushalias()",
+      "source_file": "buildRemoteRegistry.sh",
+      "source_location": "L49"
+    },
+    {
+      "id": "buildremoteregistry_sh__entry",
+      "label": "buildRemoteRegistry.sh script",
+      "_origin": "ast",
+      "community": 0,
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "norm_label": "buildremoteregistry.sh script",
+      "source_file": "buildRemoteRegistry.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "buildremoteregistry_showbuildparameters",
+      "label": "showBuildParameters()",
+      "_origin": "ast",
+      "community": 0,
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "norm_label": "showbuildparameters()",
+      "source_file": "buildRemoteRegistry.sh",
+      "source_location": "L29"
+    },
+    {
+      "id": "templates_pkp_root_usr_local_bin_pkp_patch",
+      "label": "pkp-patch",
+      "_origin": "ast",
+      "community": 1,
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "pkp-patch",
+      "source_file": "templates/pkp/root/usr/local/bin/pkp-patch",
+      "source_location": "L1"
+    },
+    {
+      "id": "templates_pkp_root_usr_local_bin_pkp_patch__entry",
+      "label": "pkp-patch script",
+      "_origin": "ast",
+      "community": 1,
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "norm_label": "pkp-patch script",
+      "source_file": "templates/pkp/root/usr/local/bin/pkp-patch",
+      "source_location": "L1"
+    },
+    {
+      "id": "templates_pkp_root_usr_local_bin_pkp_patch_applypatch",
+      "label": "applyPatch()",
+      "_origin": "ast",
+      "community": 1,
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "norm_label": "applypatch()",
+      "source_file": "templates/pkp/root/usr/local/bin/pkp-patch",
+      "source_location": "L8"
+    },
+    {
+      "id": "templates_pkp_root_usr_local_bin_pkp_patch_main",
+      "label": "main()",
+      "_origin": "ast",
+      "community": 1,
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "norm_label": "main()",
+      "source_file": "templates/pkp/root/usr/local/bin/pkp-patch",
+      "source_location": "L17"
+    },
+    {
+      "id": "templates_pkp_root_usr_local_bin_pkp_cli_install",
+      "label": "pkp-cli-install",
+      "_origin": "ast",
+      "community": 2,
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "pkp-cli-install",
+      "source_file": "templates/pkp/root/usr/local/bin/pkp-cli-install",
+      "source_location": "L1"
+    },
+    {
+      "id": "templates_pkp_root_usr_local_bin_pkp_cli_install__entry",
+      "label": "pkp-cli-install script",
+      "_origin": "ast",
+      "community": 2,
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "norm_label": "pkp-cli-install script",
+      "source_file": "templates/pkp/root/usr/local/bin/pkp-cli-install",
+      "source_location": "L1"
+    },
+    {
+      "id": "templates_pkp_root_usr_local_bin_pkp_migrate",
+      "label": "pkp-migrate",
+      "_origin": "ast",
+      "community": 3,
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "pkp-migrate",
+      "source_file": "templates/pkp/root/usr/local/bin/pkp-migrate",
+      "source_location": "L1"
+    },
+    {
+      "id": "templates_pkp_root_usr_local_bin_pkp_migrate__entry",
+      "label": "pkp-migrate script",
+      "_origin": "ast",
+      "community": 3,
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "norm_label": "pkp-migrate script",
+      "source_file": "templates/pkp/root/usr/local/bin/pkp-migrate",
+      "source_location": "L1"
+    },
+    {
+      "id": "templates_pkp_root_usr_local_bin_pkp_pre_start",
+      "label": "pkp-pre-start",
+      "_origin": "ast",
+      "community": 4,
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "pkp-pre-start",
+      "source_file": "templates/pkp/root/usr/local/bin/pkp-pre-start",
+      "source_location": "L1"
+    },
+    {
+      "id": "templates_pkp_root_usr_local_bin_pkp_pre_start__entry",
+      "label": "pkp-pre-start script",
+      "_origin": "ast",
+      "community": 4,
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "norm_label": "pkp-pre-start script",
+      "source_file": "templates/pkp/root/usr/local/bin/pkp-pre-start",
+      "source_location": "L1"
+    },
+    {
+      "id": "templates_pkp_root_usr_local_bin_pkp_run_scheduled",
+      "label": "pkp-run-scheduled",
+      "_origin": "ast",
+      "community": 5,
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "pkp-run-scheduled",
+      "source_file": "templates/pkp/root/usr/local/bin/pkp-run-scheduled",
+      "source_location": "L1"
+    },
+    {
+      "id": "templates_pkp_root_usr_local_bin_pkp_run_scheduled__entry",
+      "label": "pkp-run-scheduled script",
+      "_origin": "ast",
+      "community": 5,
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "norm_label": "pkp-run-scheduled script",
+      "source_file": "templates/pkp/root/usr/local/bin/pkp-run-scheduled",
+      "source_location": "L1"
+    },
+    {
+      "id": "templates_pkp_root_usr_local_bin_pkp_start",
+      "label": "pkp-start",
+      "_origin": "ast",
+      "community": 6,
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "pkp-start",
+      "source_file": "templates/pkp/root/usr/local/bin/pkp-start",
+      "source_location": "L1"
+    },
+    {
+      "id": "templates_pkp_root_usr_local_bin_pkp_start__entry",
+      "label": "pkp-start script",
+      "_origin": "ast",
+      "community": 6,
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "norm_label": "pkp-start script",
+      "source_file": "templates/pkp/root/usr/local/bin/pkp-start",
+      "source_location": "L1"
+    },
+    {
+      "id": "templates_pkp_root_usr_local_bin_pkp_upgrade",
+      "label": "pkp-upgrade",
+      "_origin": "ast",
+      "community": 7,
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "pkp-upgrade",
+      "source_file": "templates/pkp/root/usr/local/bin/pkp-upgrade",
+      "source_location": "L1"
+    },
+    {
+      "id": "templates_pkp_root_usr_local_bin_pkp_upgrade__entry",
+      "label": "pkp-upgrade script",
+      "_origin": "ast",
+      "community": 7,
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "norm_label": "pkp-upgrade script",
+      "source_file": "templates/pkp/root/usr/local/bin/pkp-upgrade",
+      "source_location": "L1"
+    },
+    {
+      "id": "templates_pkp_root_usr_local_bin_pkp_variable",
+      "label": "pkp-variable",
+      "_origin": "ast",
+      "community": 8,
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "pkp-variable",
+      "source_file": "templates/pkp/root/usr/local/bin/pkp-variable",
+      "source_location": "L1"
+    },
+    {
+      "id": "templates_pkp_root_usr_local_bin_pkp_variable__entry",
+      "label": "pkp-variable script",
+      "_origin": "ast",
+      "community": 8,
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "norm_label": "pkp-variable script",
+      "source_file": "templates/pkp/root/usr/local/bin/pkp-variable",
+      "source_location": "L1"
+    }
+  ],
+  "links": [
+    {
+      "source": "buildremoteregistry_main",
+      "target": "buildremoteregistry_pushalias",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "buildRemoteRegistry.sh",
+      "source_location": "L115",
+      "weight": 1.0
+    },
+    {
+      "source": "buildremoteregistry_main",
+      "target": "buildremoteregistry_normalizewebserver",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "buildRemoteRegistry.sh",
+      "source_location": "L85",
+      "weight": 1.0
+    },
+    {
+      "source": "buildremoteregistry_main",
+      "target": "buildremoteregistry_extractversions",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "buildRemoteRegistry.sh",
+      "source_location": "L92",
+      "weight": 1.0
+    },
+    {
+      "source": "buildremoteregistry_main",
+      "target": "buildremoteregistry_showbuildparameters",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "buildRemoteRegistry.sh",
+      "source_location": "L94",
+      "weight": 1.0
+    },
+    {
+      "source": "buildremoteregistry_sh__entry",
+      "target": "buildremoteregistry_main",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "buildRemoteRegistry.sh",
+      "source_location": "L124",
+      "weight": 1.0
+    },
+    {
+      "source": "templates_pkp_root_usr_local_bin_pkp_patch__entry",
+      "target": "templates_pkp_root_usr_local_bin_pkp_patch_main",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "templates/pkp/root/usr/local/bin/pkp-patch",
+      "source_location": "L43",
+      "weight": 1.0
+    },
+    {
+      "source": "templates_pkp_root_usr_local_bin_pkp_patch_main",
+      "target": "templates_pkp_root_usr_local_bin_pkp_patch_applypatch",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "templates/pkp/root/usr/local/bin/pkp-patch",
+      "source_location": "L22",
+      "weight": 1.0
+    },
+    {
+      "source": "buildremoteregistry",
+      "target": "buildremoteregistry_sh__entry",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "buildRemoteRegistry.sh",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "templates_pkp_root_usr_local_bin_pkp_cli_install",
+      "target": "templates_pkp_root_usr_local_bin_pkp_cli_install__entry",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "templates/pkp/root/usr/local/bin/pkp-cli-install",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "templates_pkp_root_usr_local_bin_pkp_migrate",
+      "target": "templates_pkp_root_usr_local_bin_pkp_migrate__entry",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "templates/pkp/root/usr/local/bin/pkp-migrate",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "templates_pkp_root_usr_local_bin_pkp_patch",
+      "target": "templates_pkp_root_usr_local_bin_pkp_patch__entry",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "templates/pkp/root/usr/local/bin/pkp-patch",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "templates_pkp_root_usr_local_bin_pkp_pre_start",
+      "target": "templates_pkp_root_usr_local_bin_pkp_pre_start__entry",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "templates/pkp/root/usr/local/bin/pkp-pre-start",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "templates_pkp_root_usr_local_bin_pkp_run_scheduled",
+      "target": "templates_pkp_root_usr_local_bin_pkp_run_scheduled__entry",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "templates/pkp/root/usr/local/bin/pkp-run-scheduled",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "templates_pkp_root_usr_local_bin_pkp_start",
+      "target": "templates_pkp_root_usr_local_bin_pkp_start__entry",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "templates/pkp/root/usr/local/bin/pkp-start",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "templates_pkp_root_usr_local_bin_pkp_upgrade",
+      "target": "templates_pkp_root_usr_local_bin_pkp_upgrade__entry",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "templates/pkp/root/usr/local/bin/pkp-upgrade",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "templates_pkp_root_usr_local_bin_pkp_variable",
+      "target": "templates_pkp_root_usr_local_bin_pkp_variable__entry",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "templates/pkp/root/usr/local/bin/pkp-variable",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "buildremoteregistry",
+      "target": "buildremoteregistry_normalizewebserver",
+      "relation": "defines",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "buildRemoteRegistry.sh",
+      "source_location": "L15",
+      "weight": 1.0
+    },
+    {
+      "source": "buildremoteregistry",
+      "target": "buildremoteregistry_extractversions",
+      "relation": "defines",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "buildRemoteRegistry.sh",
+      "source_location": "L23",
+      "weight": 1.0
+    },
+    {
+      "source": "buildremoteregistry",
+      "target": "buildremoteregistry_showbuildparameters",
+      "relation": "defines",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "buildRemoteRegistry.sh",
+      "source_location": "L29",
+      "weight": 1.0
+    },
+    {
+      "source": "buildremoteregistry",
+      "target": "buildremoteregistry_pushalias",
+      "relation": "defines",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "buildRemoteRegistry.sh",
+      "source_location": "L49",
+      "weight": 1.0
+    },
+    {
+      "source": "buildremoteregistry",
+      "target": "buildremoteregistry_main",
+      "relation": "defines",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "buildRemoteRegistry.sh",
+      "source_location": "L60",
+      "weight": 1.0
+    },
+    {
+      "source": "templates_pkp_root_usr_local_bin_pkp_patch",
+      "target": "templates_pkp_root_usr_local_bin_pkp_patch_main",
+      "relation": "defines",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "templates/pkp/root/usr/local/bin/pkp-patch",
+      "source_location": "L17",
+      "weight": 1.0
+    },
+    {
+      "source": "templates_pkp_root_usr_local_bin_pkp_patch",
+      "target": "templates_pkp_root_usr_local_bin_pkp_patch_applypatch",
+      "relation": "defines",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "templates/pkp/root/usr/local/bin/pkp-patch",
+      "source_location": "L8",
+      "weight": 1.0
+    }
+  ],
+  "hyperedges": [],
+  "built_at_commit": "68e565d6d41366725dc7fd0fcecda47c2264d61c"
+}
