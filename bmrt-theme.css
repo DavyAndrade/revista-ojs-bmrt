@@ -11,15 +11,44 @@ body {
     color: #243743;
 }
 
-/* Header & Barra Superior */
+/* Header & Banner Superior */
+.pkp_structure_head {
+    background: #ffffff url('/public/journals/2/banner.png') center bottom / cover no-repeat !important;
+    min-height: 210px;
+    padding-top: 15px;
+    padding-bottom: 0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+}
+
+.pkp_site_name .is_img img {
+    max-height: 110px !important;
+    width: auto !important;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));
+}
+
+.pkp_navigation_user_wrapper {
+    background: rgba(36, 55, 67, 0.88);
+    border-radius: 4px;
+    padding: 3px 12px;
+}
+
+.pkp_navigation_user_wrapper a {
+    color: #ffffff !important;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+/* Barra de Navegação Principal */
 .pkp_site_nav_menu {
     background-color: #198754 !important;
     border-bottom: 3px solid #006b46 !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .pkp_site_nav_menu a {
     color: #ffffff !important;
     font-weight: 500;
+    font-size: 0.95rem;
 }
 
 .pkp_site_nav_menu a:hover,
@@ -44,6 +73,7 @@ button.pkp_button {
     background-color: #198754 !important;
     border-color: #198754 !important;
     color: #ffffff !important;
+    border-radius: 3px;
 }
 
 .pkp_button_primary:hover,
@@ -55,18 +85,19 @@ button.pkp_button:hover {
 
 /* Cards de Artigos e Fascículos */
 .obj_article_summary,
-.obj_issue_summary {
+.obj_issue_summary,
+.current_issue {
     background: #ffffff;
     border-radius: 4px;
-    padding: 15px 20px;
-    margin-bottom: 15px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    padding: 20px 25px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
     border-left: 4px solid #198754;
 }
 
 .obj_article_summary .title a {
     color: #243743 !important;
-    font-size: 1.1rem;
+    font-size: 1.15rem;
     font-weight: 600;
     text-decoration: none;
 }
@@ -79,6 +110,7 @@ button.pkp_button:hover {
     color: #5b6972 !important;
     font-style: italic;
     font-size: 0.9rem;
+    margin-top: 5px;
 }
 
 /* Badges e Seções */
@@ -88,8 +120,9 @@ button.pkp_button:hover {
     color: #ffffff !important;
     border-radius: 3px;
     font-size: 0.8rem;
-    padding: 3px 8px;
+    padding: 4px 10px;
     text-decoration: none;
+    font-weight: 600;
 }
 
 .obj_galley_link:hover {
@@ -101,7 +134,7 @@ button.pkp_button:hover {
     background-color: #243743 !important;
     color: #cfd8dc !important;
     border-top: 3px solid #198754;
-    padding: 25px 0;
+    padding: 30px 0;
 }
 
 .pkp_structure_footer a {
