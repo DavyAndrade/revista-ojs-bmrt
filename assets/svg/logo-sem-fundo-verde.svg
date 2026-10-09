@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 140" width="480" height="140">
+  <defs>
+    <linearGradient id="helixGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#198754" />
+      <stop offset="50%" stop-color="#28B78D" />
+      <stop offset="100%" stop-color="#006B46" />
+    </linearGradient>
+    <filter id="cleanShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.10" />
+    </filter>
+  </defs>
+
+  <style>
+    .brand-title-clean { font-family: 'Open Sans', 'Montserrat', sans-serif; font-weight: 800; font-size: 38px; fill: #243743; letter-spacing: 2px; }
+    .brand-sub-clean { font-family: 'Open Sans', 'Montserrat', sans-serif; font-weight: 700; font-size: 14px; fill: #198754; letter-spacing: 3.5px; }
+    .brand-full-clean { font-family: 'Open Sans', sans-serif; font-weight: 500; font-size: 11.5px; fill: #5B6972; letter-spacing: 0.2px; }
+  </style>
+
+  <!-- 1. Simbolo Biocientifico / Animal Model Helix (Transparente e Isolado) -->
+  <g transform="translate(15, 10)" filter="url(#cleanShadow)">
+    <!-- Circulo Suave de Fundo -->
+    <circle cx="60" cy="60" r="54" fill="#EBF5EF" />
+    
+    <!-- Espiral de DNA / Folha Principal -->
+    <path d="M60,18 C82,18 100,36 100,58 C100,80 82,98 60,98 C50,98 42,94 36,88 C46,88 58,80 63,70 C68,60 68,48 60,40 C53,33 43,32 34,35 C40,24 49,18 60,18 Z" fill="url(#helixGrad)" />
+    
+    <!-- Curva Complementar Escura -->
+    <path d="M38,44 C43,54 50,62 60,65 C67,68 75,65 78,58 C81,51 78,43 71,40 C64,36 56,38 49,43 Z" fill="#243743" opacity="0.88" />
+    
+    <!-- Pontos Celulares / Marcadores -->
+    <circle cx="48" cy="74" r="8" fill="#28B78D" />
+    <circle cx="72" cy="44" r="6" fill="#008037" />
+    <circle cx="36" cy="56" r="4" fill="#198754" />
+  </g>
+
+  <!-- 2. Textos Institucionais (Fundo Transparente para usar sobre qualquer cor) -->
+  <g transform="translate(150, 18)">
+    <text x="0" y="38" class="brand-title-clean">BMRT</text>
+    <text x="2" y="60" class="brand-sub-clean">SBCAL</text>
+    <line x1="2" y1="72" x2="310" y2="72" stroke="#66B387" stroke-width="2" stroke-linecap="round" />
+    <text x="2" y="93" class="brand-full-clean">Biological Models Research &amp; Technology</text>
+  </g>
+</svg>
