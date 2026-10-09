@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 475 60" width="475" height="60">
+  <style>
+    .issn-label { font-family: 'Open Sans', 'Roboto', sans-serif; font-size: 13px; font-weight: 700; fill: #FFFFFF; letter-spacing: 1.5px; }
+    .issn-num { font-family: 'Open Sans', 'Roboto', sans-serif; font-size: 13px; font-weight: 400; fill: #E0F0E7; letter-spacing: 1px; }
+    .title-line { font-family: 'Open Sans', 'Roboto', sans-serif; font-size: 15px; font-weight: 600; fill: #FFFFFF; letter-spacing: 0.3px; }
+    .badge-bg { fill: rgba(0, 107, 70, 0.45); rx: 4px; }
+  </style>
+
+  <!-- Fundo semitransparente sutil para contraste -->
+  <rect x="0" y="0" width="475" height="56" class="badge-bg" />
+
+  <g transform="translate(14, 22)">
+    <!-- Linha 1: e-ISSN Oficial -->
+    <text x="0" y="0">
+      <tspan class="issn-label">ISSN </tspan>
+      <tspan class="issn-num">2675-9225 (Electronic)</tspan>
+    </text>
+
+    <!-- Linha 2: Titulo por extenso -->
+    <text x="0" y="24" class="title-line">Biological Models Research and Technology</text>
+  </g>
+</svg>

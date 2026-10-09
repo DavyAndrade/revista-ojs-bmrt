@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 250" width="250" height="250">
+  <defs>
+    <linearGradient id="cadGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#243743" />
+      <stop offset="100%" stop-color="#142129" />
+    </linearGradient>
+    <filter id="cadShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#000000" flood-opacity="0.2" />
+    </filter>
+  </defs>
+
+  <style>
+    .cad-text { font-family: 'Open Sans', sans-serif; font-weight: 800; font-size: 18px; fill: #FFFFFF; text-anchor: middle; letter-spacing: 1px; }
+    .cad-sub { font-family: 'Open Sans', sans-serif; font-weight: 700; font-size: 14px; fill: #28B78D; text-anchor: middle; letter-spacing: 1px; }
+    .cad-btn { fill: #198754; stroke: #28B78D; stroke-width: 1.5; rx: 6px; }
+  </style>
+
+  <!-- Card de Fundo -->
+  <rect x="5" y="5" width="240" height="240" rx="12" fill="url(#cadGrad)" filter="url(#cadShadow)" stroke="#5B6972" stroke-width="1.5" />
+
+  <!-- Icone de Usuario / Cadastro -->
+  <g transform="translate(125, 75)">
+    <!-- Circulo / Aura de destaque -->
+    <circle cx="0" cy="0" r="38" fill="rgba(40, 183, 141, 0.12)" />
+    
+    <!-- Cabeca -->
+    <circle cx="0" cy="-10" r="16" fill="#28B78D" />
+    
+    <!-- Tronco -->
+    <path d="M-26,24 C-26,5 26,5 26,24 Z" fill="#28B78D" />
+    
+    <!-- Sinal de Mais (+) de Novo Cadastro -->
+    <circle cx="18" cy="-14" r="10" fill="#198754" stroke="#FFFFFF" stroke-width="2" />
+    <path d="M18,-19 L18,-9 M13,-14 L23,-14" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
+  </g>
+
+  <!-- Textos de Acao -->
+  <text x="125" y="156" class="cad-text">CADASTRE-SE</text>
+  <text x="125" y="178" class="cad-sub">AUTOR / AVALIADOR</text>
+
+  <!-- Botao de Clique Aqui -->
+  <g transform="translate(45, 194)">
+    <rect x="0" y="0" width="160" height="34" class="cad-btn" />
+    <text x="80" y="22" font-family="'Open Sans', sans-serif" font-weight="700" font-size="12px" fill="#FFFFFF" text-anchor="middle" letter-spacing="1px">CLICK HERE</text>
+  </g>
+</svg>

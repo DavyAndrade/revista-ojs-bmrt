@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 250" width="250" height="250">
+  <defs>
+    <linearGradient id="subGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#198754" />
+      <stop offset="100%" stop-color="#006B46" />
+    </linearGradient>
+    <filter id="btnShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#000000" flood-opacity="0.15" />
+    </filter>
+  </defs>
+
+  <style>
+    .cta-text { font-family: 'Open Sans', sans-serif; font-weight: 800; font-size: 19px; fill: #FFFFFF; text-anchor: middle; letter-spacing: 1px; }
+    .cta-sub { font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 13px; fill: #E0F0E7; text-anchor: middle; letter-spacing: 0.5px; }
+    .icon-bg { fill: #FFFFFF; }
+  </style>
+
+  <!-- Card de Fundo -->
+  <rect x="5" y="5" width="240" height="240" rx="12" fill="url(#subGrad)" filter="url(#btnShadow)" stroke="#66B387" stroke-width="2" />
+
+  <!-- Icone de Documento / Envio de Artigo -->
+  <g transform="translate(125, 80)">
+    <!-- Folha de Artigo -->
+    <path d="M-26,-42 L12,-42 L26,-28 L26,42 L-26,42 Z" fill="#FFFFFF" opacity="0.95" />
+    <!-- Dobra do canto -->
+    <path d="M12,-42 L12,-28 L26,-28 Z" fill="#E0F0E7" />
+    <!-- Linhas de texto representativas -->
+    <line x1="-16" y1="-20" x2="8" y2="-20" stroke="#198754" stroke-width="3" stroke-linecap="round" />
+    <line x1="-16" y1="-8" x2="16" y2="-8" stroke="#198754" stroke-width="3" stroke-linecap="round" />
+    <line x1="-16" y1="4" x2="16" y2="4" stroke="#198754" stroke-width="3" stroke-linecap="round" />
+    <line x1="-16" y1="16" x2="4" y2="16" stroke="#198754" stroke-width="3" stroke-linecap="round" />
+    
+    <!-- Seta de Upload / Submissao -->
+    <circle cx="16" cy="24" r="14" fill="#008037" stroke="#FFFFFF" stroke-width="2" />
+    <path d="M16,16 L10,22 L14,22 L14,30 L18,30 L18,22 L22,22 Z" fill="#FFFFFF" />
+  </g>
+
+  <!-- Textos de Acao -->
+  <text x="125" y="172" class="cta-text">SUBMETA SEU</text>
+  <text x="125" y="196" class="cta-text">ARTIGO</text>
+  <text x="125" y="222" class="cta-sub">CLIQUE AQUI</text>
+</svg>

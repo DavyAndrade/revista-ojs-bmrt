@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 570 180" width="570" height="180">
+  <defs>
+    <linearGradient id="bmrtGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#33995F" />
+      <stop offset="50%" stop-color="#28B78D" />
+      <stop offset="100%" stop-color="#008037" />
+    </linearGradient>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.12" />
+    </filter>
+  </defs>
+
+  <style>
+    .brand-title { font-family: 'Open Sans', 'Montserrat', sans-serif; font-weight: 800; font-size: 42px; fill: #243743; letter-spacing: 2px; }
+    .brand-sub { font-family: 'Open Sans', 'Montserrat', sans-serif; font-weight: 700; font-size: 15px; fill: #008037; letter-spacing: 4px; }
+    .brand-full { font-family: 'Open Sans', sans-serif; font-weight: 400; font-size: 13px; fill: #5B6972; }
+    .dna-leaf { fill: url(#bmrtGrad); }
+  </style>
+
+  <!-- Simbolo Biocientifico / Animal Model Helix Icon -->
+  <g transform="translate(45, 20)" filter="url(#shadow)">
+    <!-- Circulo Suave de Fundo -->
+    <circle cx="70" cy="70" r="64" fill="#EBF5EF" />
+    
+    <!-- Folha / Espiral de DNA Superior -->
+    <path class="dna-leaf" d="M70,18 C98,18 120,40 120,68 C120,95 98,118 70,118 C58,118 48,114 40,106 C52,106 68,96 74,84 C80,72 80,56 70,46 C62,38 50,36 38,40 C46,26 57,18 70,18 Z" opacity="0.95" />
+    
+    <!-- Espiral Complementar / Modelo Biologico -->
+    <path d="M42,50 C48,62 56,72 68,76 C76,79 86,76 90,68 C94,60 90,50 82,46 C74,42 64,44 56,50 Z" fill="#243743" opacity="0.85" />
+    
+    <!-- Nucleo / Celula de Precisao -->
+    <circle cx="56" cy="88" r="10" fill="#28B78D" />
+    <circle cx="84" cy="52" r="7" fill="#008037" />
+    <circle cx="42" cy="65" r="5" fill="#33995F" />
+  </g>
+
+  <!-- Bloco Tipografico -->
+  <g transform="translate(205, 35)">
+    <!-- Sigla Principal -->
+    <text x="0" y="44" class="brand-title">BMRT</text>
+    
+    <!-- Sigla da Sociedade Cientifica Mantenedora -->
+    <text x="2" y="70" class="brand-sub">SBCAL</text>
+    
+    <!-- Linha Divisoria -->
+    <line x1="2" y1="82" x2="330" y2="82" stroke="#66B387" stroke-width="2" stroke-linecap="round" />
+    
+    <!-- Nome Completo da Revista -->
+    <text x="2" y="104" class="brand-full">Biological Models Research &amp; Technology</text>
+  </g>
+</svg>

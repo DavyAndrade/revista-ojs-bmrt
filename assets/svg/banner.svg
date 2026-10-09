@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 226" width="100%" height="226" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#33995F" />
+      <stop offset="40%" stop-color="#28B78D" />
+      <stop offset="100%" stop-color="#006B46" />
+    </linearGradient>
+    <linearGradient id="polyGrad1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.12" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.02" />
+    </linearGradient>
+    <linearGradient id="polyGrad2" x1="100%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#004D31" stop-opacity="0.35" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.05" />
+    </linearGradient>
+  </defs>
+
+  <!-- Fundo Gradiente Base Verde Institucional -->
+  <rect x="0" y="0" width="1920" height="226" fill="url(#bgGrad)" />
+
+  <!-- Triangulos e Poligonos Geometricos Estilo Periodikos Original -->
+  <polygon points="0,0 480,0 240,226" fill="url(#polyGrad1)" />
+  <polygon points="240,226 480,0 720,226" fill="url(#polyGrad2)" />
+  <polygon points="480,0 960,0 720,226" fill="url(#polyGrad1)" />
+  <polygon points="720,226 960,0 1200,226" fill="url(#polyGrad2)" />
+  <polygon points="960,0 1440,0 1200,226" fill="url(#polyGrad1)" />
+  <polygon points="1200,226 1440,0 1680,226" fill="url(#polyGrad2)" />
+  <polygon points="1440,0 1920,0 1680,226" fill="url(#polyGrad1)" />
+  <polygon points="1680,226 1920,0 1920,226" fill="url(#polyGrad2)" />
+
+  <!-- Acentos e Linhas Cientificas de Luz -->
+  <line x1="0" y1="225" x2="1920" y2="225" stroke="#004D31" stroke-width="2" />
+  <line x1="0" y1="223" x2="1920" y2="223" stroke="#66B387" stroke-width="1" opacity="0.6" />
+</svg>
