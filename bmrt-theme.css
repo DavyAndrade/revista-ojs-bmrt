@@ -1,60 +1,254 @@
 /**
  * BMRT OJS Custom Theme
- * Baseado na identidade visual oficial da BMRT (Periodikos)
+ * Baseado na identidade visual oficial da BMRT (Periodikos / SBCAL)
  */
 
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
 
+/* --- Reset e Tipografia Geral --- */
 body {
     background-color: #f1f2f3 !important;
     font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
     color: #243743;
 }
 
-/* Header & Banner Superior */
+/* ========================================================
+   ESTRUTURA DO HEADER (Fiel ao Portal Periodikos BMRT)
+   ======================================================== */
+
 .pkp_structure_head {
-    background: #ffffff url('/public/journals/2/banner.png') center bottom / cover no-repeat !important;
-    min-height: 210px;
-    padding-top: 15px;
-    padding-bottom: 0;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+    background-color: #ffffff !important;
+    background-image: url('/public/journals/2/banner.png') !important;
+    background-position: center bottom !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    border-bottom: none !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08) !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    position: relative !important;
+}
+
+/* Container do Header */
+.pkp_head_wrapper,
+.has_site_logo .pkp_head_wrapper {
+    position: relative !important;
+    max-width: 1140px !important;
+    width: 94% !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+/* Faixa Superior: Logo da Revista e Banner ISSN */
+.pkp_site_name_wrapper {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    height: auto !important;
+    min-height: 140px !important;
+    padding: 20px 10px 15px 10px !important;
+    position: relative !important;
+}
+
+.pkp_site_name {
+    position: static !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    text-align: left !important;
+}
+
+.pkp_site_name .is_img {
+    display: inline-block !important;
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
 .pkp_site_name .is_img img {
-    max-height: 110px !important;
+    height: 75px !important;
+    max-height: 80px !important;
     width: auto !important;
-    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));
+    display: block !important;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.12));
 }
 
-.pkp_navigation_user_wrapper {
-    background: rgba(36, 55, 67, 0.88);
-    border-radius: 4px;
-    padding: 3px 12px;
+/* Banner de ISSN / SBCAL à direita */
+.pkp_site_name_wrapper::after {
+    content: "" !important;
+    display: block !important;
+    width: 320px !important;
+    height: 65px !important;
+    background: url('/public/journals/2/banner-issn.png') no-repeat right center !important;
+    background-size: contain !important;
 }
 
-.pkp_navigation_user_wrapper a {
-    color: #ffffff !important;
-    font-size: 0.85rem;
-    font-weight: 500;
+@media (max-width: 820px) {
+    .pkp_site_name_wrapper::after {
+        display: none !important;
+    }
 }
 
-/* Barra de Navegação Principal */
+/* ========================================================
+   BARRA DE NAVEGAÇÃO PRINCIPAL (Verde BMRT #198754)
+   ======================================================== */
+
 .pkp_site_nav_menu {
     background-color: #198754 !important;
     border-bottom: 3px solid #006b46 !important;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin: 0 !important;
+    padding: 0 15px !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    position: static !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15) !important;
 }
 
-.pkp_site_nav_menu a {
+/* Linha primária de navegação */
+.pkp_navigation_primary_row {
+    flex: 1 1 auto !important;
+}
+
+.pkp_navigation_primary_wrapper {
+    display: flex !important;
+    align-items: center !important;
+    padding: 0 !important;
+    width: auto !important;
+}
+
+ul.pkp_navigation_primary {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    list-style: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+ul.pkp_navigation_primary > li {
+    display: inline-block !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+ul.pkp_navigation_primary > li > a {
     color: #ffffff !important;
-    font-weight: 500;
-    font-size: 0.95rem;
+    font-size: 0.92rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.2px !important;
+    padding: 13px 16px !important;
+    display: block !important;
+    text-decoration: none !important;
+    transition: background-color 0.18s ease-in-out !important;
+    border: none !important;
+    border-bottom: 3px solid transparent !important;
 }
 
-.pkp_site_nav_menu a:hover,
-.pkp_site_nav_menu .active > a {
+ul.pkp_navigation_primary > li:hover > a,
+ul.pkp_navigation_primary > li.active > a {
     background-color: #006b46 !important;
     color: #ffffff !important;
+    border-bottom: 3px solid #ffffff !important;
+}
+
+/* Dropdown Menu na Navegação */
+ul.pkp_navigation_primary ul {
+    background-color: #ffffff !important;
+    border-radius: 0 0 4px 4px !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.18) !important;
+    border-top: 2px solid #198754 !important;
+}
+
+ul.pkp_navigation_primary ul li a {
+    color: #243743 !important;
+    font-size: 0.9rem !important;
+    padding: 10px 18px !important;
+    font-weight: 500 !important;
+}
+
+ul.pkp_navigation_primary ul li a:hover {
+    background-color: #f1f8f4 !important;
+    color: #198754 !important;
+}
+
+/* Busca no Menu */
+.pkp_navigation_search_wrapper {
+    margin: 0 10px 0 0 !important;
+    padding: 0 !important;
+    border: none !important;
+}
+
+.pkp_navigation_search_wrapper a {
+    color: #ffffff !important;
+    font-size: 0.88rem !important;
+    padding: 13px 14px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    text-decoration: none !important;
+}
+
+.pkp_navigation_search_wrapper a:hover {
+    background-color: #006b46 !important;
+}
+
+/* Menu de Usuário (Acesso / Cadastro) */
+.pkp_navigation_user_wrapper,
+#navigationUserWrapper {
+    position: static !important;
+    transform: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: transparent !important;
+    border: none !important;
+    display: flex !important;
+    align-items: center !important;
+}
+
+ul.pkp_navigation_user {
+    display: flex !important;
+    align-items: center !important;
+    list-style: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+}
+
+ul.pkp_navigation_user > li {
+    display: inline-block !important;
+    margin-left: 6px !important;
+}
+
+ul.pkp_navigation_user > li > a {
+    color: #ffffff !important;
+    font-size: 0.86rem !important;
+    font-weight: 600 !important;
+    background: rgba(0, 0, 0, 0.18) !important;
+    border: 1px solid rgba(255, 255, 255, 0.25) !important;
+    border-radius: 4px !important;
+    padding: 6px 12px !important;
+    text-decoration: none !important;
+    transition: all 0.2s ease !important;
+}
+
+ul.pkp_navigation_user > li > a:hover {
+    background: #006b46 !important;
+    border-color: #ffffff !important;
+    color: #ffffff !important;
+}
+
+/* ========================================================
+   CONTEÚDO PRINCIPAL E CARDS
+   ======================================================== */
+
+.pkp_structure_content {
+    max-width: 1140px !important;
+    width: 94% !important;
+    margin: 30px auto !important;
+    padding: 0 !important;
 }
 
 /* Títulos */
@@ -66,14 +260,15 @@ h1, h2, h3, h4, h5, h6,
     font-weight: 600;
 }
 
-/* Botões de Ação Principal */
+/* Botões */
 .pkp_button_primary,
 .cmp_button,
 button.pkp_button {
     background-color: #198754 !important;
     border-color: #198754 !important;
     color: #ffffff !important;
-    border-radius: 3px;
+    border-radius: 4px !important;
+    font-weight: 600 !important;
 }
 
 .pkp_button_primary:hover,
@@ -83,23 +278,23 @@ button.pkp_button:hover {
     border-color: #006b46 !important;
 }
 
-/* Cards de Artigos e Fascículos */
+/* Cards de Artigos e Edições */
 .obj_article_summary,
 .obj_issue_summary,
 .current_issue {
-    background: #ffffff;
-    border-radius: 4px;
-    padding: 20px 25px;
-    margin-bottom: 20px;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
-    border-left: 4px solid #198754;
+    background: #ffffff !important;
+    border-radius: 6px !important;
+    padding: 22px 28px !important;
+    margin-bottom: 24px !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06) !important;
+    border-left: 5px solid #198754 !important;
 }
 
 .obj_article_summary .title a {
     color: #243743 !important;
-    font-size: 1.15rem;
-    font-weight: 600;
-    text-decoration: none;
+    font-size: 1.15rem !important;
+    font-weight: 600 !important;
+    text-decoration: none !important;
 }
 
 .obj_article_summary .title a:hover {
@@ -108,35 +303,46 @@ button.pkp_button:hover {
 
 .obj_article_summary .authors {
     color: #5b6972 !important;
-    font-style: italic;
-    font-size: 0.9rem;
-    margin-top: 5px;
+    font-style: italic !important;
+    font-size: 0.92rem !important;
+    margin-top: 6px !important;
 }
 
-/* Badges e Seções */
+/* Badges e Botões de Galley (PDF) */
 .badge_section,
 .obj_galley_link {
     background-color: #008037 !important;
     color: #ffffff !important;
-    border-radius: 3px;
-    font-size: 0.8rem;
-    padding: 4px 10px;
-    text-decoration: none;
-    font-weight: 600;
+    border-radius: 4px !important;
+    font-size: 0.82rem !important;
+    padding: 6px 14px !important;
+    text-decoration: none !important;
+    font-weight: 600 !important;
+    display: inline-block !important;
 }
 
 .obj_galley_link:hover {
     background-color: #006b46 !important;
+    color: #ffffff !important;
 }
 
-/* Rodapé */
+/* ========================================================
+   RODAPÉ (Footer)
+   ======================================================== */
+
 .pkp_structure_footer {
     background-color: #243743 !important;
     color: #cfd8dc !important;
-    border-top: 3px solid #198754;
-    padding: 30px 0;
+    border-top: 4px solid #198754 !important;
+    padding: 35px 0 !important;
+    margin-top: 40px !important;
 }
 
 .pkp_structure_footer a {
     color: #66b387 !important;
+}
+
+.pkp_structure_footer a:hover {
+    color: #ffffff !important;
+    text-decoration: underline !important;
 }
