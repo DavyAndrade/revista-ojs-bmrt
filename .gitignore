@@ -20,3 +20,4 @@ volumes/public/
 volumes/public/**
 volumes/logs/
 volumes/logs/**
+.maestri/
